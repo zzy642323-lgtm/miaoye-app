@@ -1,0 +1,8 @@
+/* Square sprite windows prevent the adjoining atlas row from showing. */
+.cat-sprite{height:auto!important;aspect-ratio:1!important;overflow:hidden}
+.notebook-shelf{position:relative}
+
+.cat-sprite{background-image:url('./assets/cat-portraits-v12.webp')!important;background-size:300% 200%!important;background-position:0 0!important}
+.cat-sprite[data-cat='1']{background-position:50% 0!important}.cat-sprite[data-cat='2']{background-position:100% 0!important}.cat-sprite[data-cat='3']{background-position:0 100%!important}.cat-sprite[data-cat='4']{background-position:50% 100%!important}.cat-sprite[data-cat='5']{background-position:100% 100%!important}
+.room-cat-thumb .cat-sprite{width:clamp(42px,7vw,68px);margin:auto}
+@media(max-width:760px){.room-cat-thumb .cat-sprite{width:46px}}

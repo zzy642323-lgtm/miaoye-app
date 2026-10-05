@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791102658142,
+      "tag": "0000_stale_vengeance",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791131581349,
+      "tag": "0001_steep_polaris",
+      "breakpoints": true
+    }
+  ]
+}

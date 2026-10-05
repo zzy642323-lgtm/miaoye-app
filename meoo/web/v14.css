@@ -1,0 +1,6 @@
+.cat-pose{background-image:url('./assets/cat-actions-v14.webp')!important;background-size:600% 500%!important;aspect-ratio:1!important;height:auto!important;overflow:hidden;background-repeat:no-repeat}
+
+.paint-stamp{background-image:url('./assets/stickers-v14.webp')!important}
+.cat-sprite{background-image:url('./assets/cat-actions-v14.webp')!important;background-size:600% 500%!important;background-position:0 0!important}
+.cat-sprite[data-cat='1']{background-position:0 25%!important}.cat-sprite[data-cat='2']{background-position:0 50%!important}.cat-sprite[data-cat='3']{background-position:0 75%!important}.cat-sprite[data-cat='4']{background-position:0 100%!important}.cat-sprite[data-cat='5']{background-position:60% 0!important}
+.cat-pose,.cat-sprite{clip-path:inset(12% 2% 0%)}

@@ -1,0 +1,6 @@
+.room-cat-thumb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;box-sizing:border-box}
+.room-cat-thumb>span:last-child{display:block;width:100%;white-space:nowrap;text-align:center;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
+.room-cat-thumb .cat-sprite{display:block;flex:none;max-width:100%}
+.book-manage-row{gap:10px;flex-wrap:wrap}.book-manage-row strong{min-width:100px}.book-manage-row .text-button{white-space:nowrap}
+.cover-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;padding:12px 5px}.cover-picker .notebook-cover{width:100%;min-width:0;height:175px;transform:none;margin:0}.cover-picker .cover-title{font-size:17px}
+.background-comic .background-art{width:100%;aspect-ratio:4/3;object-fit:cover;border:4px solid #fffdf3;border-radius:12px;box-sizing:border-box}.background-comic .comic-caption{font-size:16px;min-height:5.5em}.background-comic .comic-bottom{gap:15px}.background-comic .eyebrow{font-size:14px}.background-comic h1{margin-top:12px}

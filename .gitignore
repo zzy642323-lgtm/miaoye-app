@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.meoo/
+.openai/
+.sites-runtime/
+node_modules/
+dist/
+qa/
+*.log
+*.keystore
+*.jks
+*.pem
+*.idsig
+*.tar.gz
