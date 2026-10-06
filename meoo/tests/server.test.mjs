@@ -27,13 +27,14 @@ test('standalone homepage, every packaged asset, local auth and APK are served c
     assert.equal((await fetch(origin + '/api/entries')).status, 401);
     assert.equal((await fetch(origin + '/%2e%2e%2fpackage.json')).status, 403);
     assert.equal((await fetch(origin + '/.env')).status, 403);
-    const apk = await fetch(origin + '/downloads/miaoye-0.16.0-test.apk', {method:'HEAD'});
+    const apk = await fetch(origin + '/downloads/miaoye-0.17.0-test.apk', {method:'HEAD'});
     assert.equal(apk.headers.get('content-type'), 'application/vnd.android.package-archive');
     assert.ok(Number(apk.headers.get('content-length')) > 4000000);
-    const app = await (await fetch(origin + '/app.js')).text();
-    assert.match(app, /window.MIAOYE_ANDROID\?'':'<a/);
     const images = await (await fetch(origin + '/images.js')).text();
-    assert.match(images, /window.MIAOYE_STANDALONE/);
+    assert.match(images, /local-ai-cutout.js/);
+    assert.doesNotMatch(images, /https:\/\/esm.sh/);
+    assert.equal((await fetch(origin + '/vendor/ort-wasm-simd-threaded.mjs', {method:'HEAD'})).headers.get('content-type'), 'text/javascript; charset=utf-8');
+    assert.equal((await fetch(origin + '/vendor/ort-wasm-simd-threaded.wasm', {method:'HEAD'})).headers.get('content-type'), 'application/wasm');
   } finally {
     server.closeAllConnections();
     await new Promise(resolve => server.close(resolve));

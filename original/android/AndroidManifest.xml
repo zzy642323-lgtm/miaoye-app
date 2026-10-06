@@ -1,7 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.miaoye.journal" android:versionCode="16" android:versionName="0.16.0-test">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.miaoye.journal" android:versionCode="17" android:versionName="0.17.0-test">
   <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35" />
 
-  <application android:label="喵页" android:icon="@drawable/icon" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false" android:usesCleartextTraffic="false">
+  <queries><intent><action android:name="android.media.action.IMAGE_CAPTURE" /></intent></queries>
+  <application android:label="鍠甸〉" android:icon="@drawable/icon" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false" android:usesCleartextTraffic="false">
+    <provider android:name=".CameraProvider" android:authorities="com.miaoye.journal.camera" android:exported="false" android:grantUriPermissions="true" />
     <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden">
       <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
     </activity>

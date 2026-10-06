@@ -2,7 +2,7 @@
 
 Android 8.0 及以上，包名 `com.miaoye.journal`。APK 把网页、开屏漫画、字体和贴纸打包在本机，通过 Android WebView HTTPS 虚拟来源加载。主界面、本机存储、批量选图、调色、排版、文字、猫咪、日历和 PNG 导出无需 ChatGPT 账号。
 
-离线能力：0.10 版直接从安装包读取首页，不申请联网权限。简单背景抠图在本机完成；复杂背景保留原图，可手动擦除、恢复和修边。安卓本机版暂未开放云同步服务，不使用 ChatGPT 登录，也不包含网页用户的记录。照片通过系统文档选择器导入，PNG 通过系统保存对话框导出。相机按钮在本版使用系统照片选择器。
+离线能力：0.10 版直接从安装包读取首页，不申请联网权限。0.17 内置 U²-Net small 模型与 ONNX Runtime Web WASM，本机自动识别主体，无需联网；复杂边缘可手动擦除、恢复和修边。安卓本机版暂未开放云同步服务，不使用 ChatGPT 登录，也不包含网页用户的记录。照片通过系统照片或文档选择器导入，PNG 通过系统保存对话框导出。相机按钮调用系统相机，并通过临时 JPEG 内容 URI 接收拍摄结果。
 
 使用本机 `.sites-runtime/android-tools` 中的官方 Google Android Build Tools 35 / Platform 35 与 Adoptium Temurin JDK 21，运行 `./android/build.ps1`。没有安装系统服务，也不修改系统 PATH；环境变量仅在构建进程生效。编译直接使用 javac、d8、aapt2、zipalign、apksigner。
 
@@ -32,3 +32,9 @@ Windows aapt2 -A 将 assets 内路径写成反斜杠。Python zipfile 自动标�
 ## 0.16 启动请求修复
 
 0.15 的拦截器将 data: 页面按外网资源返回 403，造成 ERR_HTTP_RESPONSE_CODE_FAILURE。首页改用本地 HTTPS 地址 loadUrl，通过拦截器读取 APK 内资源；data:/blob:/about: 交给 WebView 处理，外部网络请求继续拒绝。保持原 HTTPS origin、包名和签名，覆盖安装不主动清理用户数据。添加启动路由、嵌入照片和外网阻断回归校验；仍未完成安卓实机测试。
+
+## 0.17 拍照、多选、本机智能抠图与独立故事
+
+拍照使用系统相机和私有 CameraProvider；Android 13 及以上使用 Photo Picker，一次最多 20 张，较旧系统使用支持多选的文档选择器。WASM 引擎及 U²-Net small 模型随安装包提供，照片不发往外部推理服务。五只猫按性格分别拥有十个独立故事，五张原插画保留，新增 45 张独立画面。旧收藏继续读取原画，新增收藏不重复，最多十张。
+
+编译、APK v2/v3 签名、101 个本地资源及 12 个路由案例校验通过；浏览器实测一次导入两张并完成本机抠图。安卓系统相机、原生照片选择器和飞行模式尚需实机验收。SHA256：17AD7C9F13FA6EC5758E6D720715F17997F05FE2AAB3F3FB8DB9597068828133。

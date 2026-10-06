@@ -25,7 +25,8 @@ public final class LocalPagesTest {
       if(in.read()!='<') throw new AssertionError("Startup route does not serve HTML");
     }
     if(!"/index.html".equals(LocalRequests.pagePath("/"))) throw new AssertionError("Root must resolve to homepage");
-    Set<String> required = new HashSet<>(Arrays.asList("assets/web/index.html", "assets/web/app.js", "assets/web/android-config.js", "assets/web/v14.css", "assets/web/assets/cat-actions-v14.webp"));
+    Set<String> required = new HashSet<>(Arrays.asList("assets/web/index.html", "assets/web/app.js", "assets/web/android-config.js", "assets/web/v14.css", "assets/web/assets/cat-actions-v14.webp", "assets/web/local-ai-cutout.js", "assets/web/vendor/ort.wasm.min.js", "assets/web/vendor/ort-wasm-simd-threaded.mjs", "assets/web/vendor/ort-wasm-simd-threaded.wasm", "assets/web/models/u2netp.onnx"));
+    for(int cat=0;cat<5;cat++){required.add("assets/web/assets/adventure-"+cat+"-v8.webp");for(int story=2;story<=10;story++)required.add("assets/web/assets/adventure-"+cat+"-"+story+"-v9.webp");}
     try (ZipFile zip = new ZipFile(apk)) {
       Enumeration<? extends ZipEntry> entries = zip.entries();
       while(entries.hasMoreElements()) {

@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const web = path.resolve(fileURLToPath(new URL('./web/', import.meta.url)));
-const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.apk':'application/vnd.android.package-archive'};
+const types = {'.mjs':'text/javascript; charset=utf-8','.wasm':'application/wasm','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.apk':'application/vnd.android.package-archive'};
 export function createServer() {
   return http.createServer(async (req, res) => {
     const send = (status, type, body) => {
