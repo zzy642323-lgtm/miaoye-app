@@ -16,6 +16,10 @@ public final class LocalRequests {
     return Route.LOCAL;
   }
 
+  public static boolean cloudURL(String value) {
+    try { java.net.URI u=new java.net.URI(value);String path=u.getRawPath();return "https".equals(u.getScheme())&&"s7ianzbg94fw.meoo.run".equals(u.getHost())&&(u.getPort()==-1||u.getPort()==443)&&u.getUserInfo()==null&&u.getFragment()==null&&path!=null&&path.startsWith("/cloud/")&&!path.contains("%")&&!path.contains("..")&&!path.contains("\\"); } catch(Exception e) { return false; }
+  }
+
   public static String pagePath(String path) {
     return path == null || path.isEmpty() || "/".equals(path) ? "/index.html" : path;
   }

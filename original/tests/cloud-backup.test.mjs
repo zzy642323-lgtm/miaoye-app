@@ -15,7 +15,7 @@ test('cloud requests work on WebViews without AbortSignal.timeout, abort slow re
     globalThis.fetch=async()=>new Response('{"error_code":"invalid_credentials"}',{status:400});
     await assert.rejects(cloudJson('https://cloud.test'),/用户名或密码不正确/);
     globalThis.fetch=async(url,options)=>new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(Error('aborted'))));
-    await assert.rejects(cloudJson('https://cloud.test',{},5),/连接云端超时/);
+    await assert.rejects(cloudJson('https://cloud.test',{},5),/云服务响应超时/);
   }finally{globalThis.fetch=originalFetch;globalThis.AbortSignal=originalSignal;}
 });
 test('cloud restore validates format and retains local photos, cat stories and draft without importing account tokens',()=>{

@@ -23,13 +23,15 @@ public final class LocalPagesTest {
     checkRoute("https://s7ianzbg94fw.meoo.run/index.html", LocalRequests.Route.BLOCKED);
     checkRoute("https://s7ianzbg94fw.meoo.run.evil.test/cloud/status", LocalRequests.Route.BLOCKED);
     checkRoute("http://s7ianzbg94fw.meoo.run/cloud/status", LocalRequests.Route.BLOCKED);
+    if(!LocalRequests.cloudURL("https://s7ianzbg94fw.meoo.run/cloud/auth/v1/token?grant_type=password"))throw new AssertionError("Cloud login blocked");
+    for(String denied:Arrays.asList("http://s7ianzbg94fw.meoo.run/cloud/status","https://s7ianzbg94fw.meoo.run:8443/cloud/status","https://user@s7ianzbg94fw.meoo.run/cloud/status","https://s7ianzbg94fw.meoo.run/cloud/%2e%2e/","https://s7ianzbg94fw.meoo.run/cloud/../secret","https://s7ianzbg94fw.meoo.run.evil.test/cloud/status","https://s7ianzbg94fw.meoo.run/cloud/status#fragment"))if(LocalRequests.cloudURL(denied))throw new AssertionError("Unsafe native destination "+denied);
     String apk = args[0]; int checked = 0;
     URI home = URI.create(LocalRequests.HOME_URL);
     try(InputStream in = LocalPages.open(apk,"web" + LocalRequests.pagePath(home.getPath()))) {
       if(in.read()!='<') throw new AssertionError("Startup route does not serve HTML");
     }
     if(!"/index.html".equals(LocalRequests.pagePath("/"))) throw new AssertionError("Root must resolve to homepage");
-    Set<String> required = new HashSet<>(Arrays.asList("assets/web/index.html", "assets/web/app.js", "assets/web/android-config.js", "assets/web/v14.css", "assets/web/assets/cat-actions-v14.webp", "assets/web/local-ai-cutout.js", "assets/web/vendor/ort.wasm.min.js", "assets/web/vendor/ort-wasm-simd-threaded.mjs", "assets/web/vendor/ort-wasm-simd-threaded.wasm", "assets/web/models/u2netp.onnx"));
+    Set<String> required = new HashSet<>(Arrays.asList("assets/web/index.html", "assets/web/app.js", "assets/web/android-config.js", "assets/web/v14.css", "assets/web/assets/cat-actions-v14.webp", "assets/web/local-ai-cutout.js", "assets/web/cloud-transport.js", "assets/web/cutout-mask.js", "assets/web/vendor/ort.wasm.min.js", "assets/web/vendor/ort-wasm-simd-threaded.mjs", "assets/web/vendor/ort-wasm-simd-threaded.wasm", "assets/web/models/u2netp.onnx"));
     for(int cat=0;cat<5;cat++){required.add("assets/web/assets/adventure-"+cat+"-v8.webp");for(int story=2;story<=10;story++)required.add("assets/web/assets/adventure-"+cat+"-"+story+"-v9.webp");}
     try (ZipFile zip = new ZipFile(apk)) {
       Enumeration<? extends ZipEntry> entries = zip.entries();

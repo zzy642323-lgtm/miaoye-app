@@ -10,3 +10,5 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 
 .friend-post{margin:24px 0;padding:18px;border:1px solid #d8dfce;border-radius:18px;background:#fffdf6}.friend-post h3{margin:8px 0}.friend-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 0;border-bottom:1px solid #d8dfce}.friend-row span{flex:1;color:#718468}.friend-post .export-preview{width:100%;height:auto}
+
+.friends-page{max-width:760px;margin:24px auto;padding:0 16px}.friends-page>h2{font-size:26px}.friends-page .friend-post{margin-top:24px}.friends-page .hero-buttons{flex-wrap:wrap}

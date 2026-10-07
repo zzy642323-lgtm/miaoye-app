@@ -1,3 +1,4 @@
+import {solidMask} from './cutout-mask.js';
 // U²-Net small model; preprocessing follows rembg's U2netpSession.
 let runtimePromise,sessionPromise;
 function runtime(){
@@ -19,8 +20,9 @@ export async function removeLocalBackground(canvas,progress){
   const mask=outputs[engine.outputNames[0]].data;let low=Infinity,high=-Infinity;
   for(let i=0;i<area;i++){low=Math.min(low,mask[i]);high=Math.max(high,mask[i]);}
   if(!Number.isFinite(high)||high-low<1e-6)throw new Error('没有识别到清晰主体，可手动修边');
-  const image=context.createImageData(size,size);let foreground=0;
-  for(let i=0;i<area;i++){const alpha=Math.round(Math.max(0,Math.min(1,(mask[i]-low)/(high-low)))*255);image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=255;image.data[i*4+3]=alpha;if(alpha>128)foreground++;}
+  const normalized=Float32Array.from(mask,v=>Math.max(0,Math.min(1,(v-low)/(high-low))));
+  const refined=solidMask(normalized,size,size),image=context.createImageData(size,size);let foreground=0;
+  for(let i=0;i<area;i++){const alpha=refined[i];image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=255;image.data[i*4+3]=alpha;if(alpha>128)foreground++;}
   if(foreground<area*.002)throw new Error('主体太小，可换一张照片或手动修边');
   context.putImageData(image,0,0);const result=document.createElement('canvas');result.width=canvas.width;result.height=canvas.height;const out=result.getContext('2d');out.drawImage(canvas,0,0);out.globalCompositeOperation='destination-in';out.imageSmoothingEnabled=true;out.imageSmoothingQuality='high';out.drawImage(input,0,0,result.width,result.height);out.globalCompositeOperation='source-over';
   progress?.('本机抠图完成',1,1);return result.toDataURL('image/png');

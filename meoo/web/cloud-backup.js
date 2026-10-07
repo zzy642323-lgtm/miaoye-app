@@ -1,3 +1,4 @@
+import {cloudFetch} from './cloud-transport.js';
 const BASE='https://s7ianzbg94fw.meoo.run/cloud/';
 const SESSION='miaoye-cloud-session', OWNER='miaoye-cloud-owner', AUTO='miaoye-cloud-auto';
 const KEYS=['books','records','draft','cat','credits','lastActivity','catLife','catNames','starterCat','activeBook','deletedBooks'];
@@ -6,7 +7,7 @@ export async function cloudJson(url,options={},timeout=120000){
   const controller=new AbortController();let expired=false;
   const timer=setTimeout(()=>{expired=true;controller.abort();},timeout);
   try{
-    const response=await fetch(url,{...options,signal:controller.signal});
+    const response=await cloudFetch(url,{...options,signal:controller.signal});
     let data;try{data=await response.json();}catch{data={};}
     if(!response.ok){
       const code=data.error_code||data.code,raw=data.msg||data.error_description||data.message||data.error;
@@ -17,8 +18,8 @@ export async function cloudJson(url,options={},timeout=120000){
     }
     return data;
   }catch(error){
-    if(expired)throw Error('连接云端超时，请检查手机网络后重试。');
-    if(error instanceof TypeError)throw Error('手机暂时连接不上云端，请检查联网权限或切换网络后重试。');
+    if(expired)throw Error('云服务响应超时，请稍后重试；本机手账仍保留。');
+    if(error instanceof TypeError)throw Error('云连接未完成，请稍后重试；若持续出现，请更新应用并记录报错。');
     throw error;
   }finally{clearTimeout(timer);}
 }
@@ -39,7 +40,7 @@ export function initCloudBackup({local,openModal,toast,esc}){
   function remember(s){session=s;if(s)localStorage.setItem(SESSION,JSON.stringify(s));else localStorage.removeItem(SESSION);}
   async function request(path,options={},auth=true){
     if(auth){if(!session)throw Error('请先登录。');if((session.expires_at||0)<Date.now()/1000+60){const s=await request('auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:session.refresh_token})},false);remember({...s,expires_at:Date.now()/1000+s.expires_in});}}
-    return cloudJson(BASE+path,{...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),...(auth?{Authorization:'Bearer '+session.access_token}:{}),...options.headers}},auth?120000:60000);
+    return cloudJson(BASE+path,{...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),...(auth?{Authorization:'Bearer '+session.access_token}:{}),...options.headers}},auth?120000:90000);
   }
   async function list(){return request('rest/v1/miaoye_backups?select=*&order=created_at.desc&limit=100');}
   async function backup(enable=false){

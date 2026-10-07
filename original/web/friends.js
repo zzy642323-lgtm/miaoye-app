@@ -1,10 +1,16 @@
-export function initFriends({cloud,openModal,toast,esc,records,prepare}){
+export function initFriends({cloud,openModal,toast,esc,records,prepare,showFeed}){
   let me,tab='today',pending=false,preview=null,posts=[];
   const rpc=(name,body={})=>cloud.request('rest/v1/rpc/miaoye_social_'+name,{method:'POST',body:JSON.stringify(body)});
   async function identity(){if(!cloud.getUser()){cloud.panel();throw Error('先登录云账号，再打开好友手账。');}me=await rpc('me');return me;}
-  async function feed(){
+  async function loadFeed(){
     await identity();posts=await rpc('feed',{p_today:tab==='today'});
-    openModal(`<h2>好友的小日子</h2><p class="muted">${esc(me.username)} · 只有双方同意的好友能看见主动分享的页面。</p><div class="hero-buttons"><button class="button secondary" data-social="today">今天</button><button class="button secondary" data-social="recent">最近分享</button><button class="button secondary" data-social="friends">管理好友</button></div><button class="button primary wide" data-social="choose">分享一页手账</button>${posts.length?posts.map(p=>`<article class="friend-post"><p><strong>${esc(p.username)}</strong> · ${esc(p.journal_day)}</p><h3>${esc(p.title)}</h3><img class="export-preview" loading="lazy" src="${esc(p.image)}" alt="${esc(p.username)}分享的手账页面"><p>${esc(p.message)}</p><button class="button secondary" data-social="like" data-id="${esc(p.id)}">${p.liked?'♥ 已点赞':'♡ 点赞'} · ${p.likes}</button>${p.owner===me.id?`<button class="text-button" data-social="unshare" data-id="${esc(p.id)}">撤回分享</button>`:''}</article>`).join(''):'<p class="muted">'+(tab==='today'?'今天还没有分享。可以先添加好友，再把今天的一页贴过来。':'还没有分享。')+'</p>'}<p class="small muted">每次显示最近 30 条。新增好友也能看到你尚未撤回的分享。</p>`);
+    (showFeed||openModal)(`<h2>好友的小日子</h2><p class="muted">${esc(me.username)} · 只有双方同意的好友能看见主动分享的页面。</p><div class="hero-buttons"><button class="button secondary" data-social="today">今天</button><button class="button secondary" data-social="recent">最近分享</button><button class="button secondary" data-social="friends">管理好友</button></div><button class="button primary wide" data-social="choose">分享一页手账</button>${posts.length?posts.map(p=>`<article class="friend-post"><p><strong>${esc(p.username)}</strong> · ${esc(p.journal_day)}</p><h3>${esc(p.title)}</h3><img class="export-preview" loading="lazy" src="${esc(p.image)}" alt="${esc(p.username)}分享的手账页面"><p>${esc(p.message)}</p><button class="button secondary" data-social="like" data-id="${esc(p.id)}">${p.liked?'♥ 已点赞':'♡ 点赞'} · ${p.likes}</button>${p.owner===me.id?`<button class="text-button" data-social="unshare" data-id="${esc(p.id)}">撤回分享</button>`:''}</article>`).join(''):'<p class="muted">'+(tab==='today'?'今天还没有分享。可以先添加好友，再把今天的一页贴过来。':'还没有分享。')+'</p>'}<p class="small muted">每次显示最近 30 条。新增好友也能看到你尚未撤回的分享。</p>`);
+  }
+  async function feed(){
+    if(!showFeed)return loadFeed();
+    if(!cloud.getUser())return showFeed('<h2>好友的小日子</h2><p class="muted">登录喵页云账号，和好友分享今天的一页，互相点个赞。</p><button class="button primary" data-action="profile">登录 / 注册云账号</button><button class="button secondary" data-social="feed">已登录，刷新好友手账</button>');
+    showFeed('<h2>好友的小日子</h2><p role="status">正在收好好友的分享…</p>');
+    try{await loadFeed();}catch(error){showFeed('<h2>好友的小日子</h2><p role="alert">'+esc(error.message)+'</p><button class="button primary" data-social="feed">重新加载</button>');}
   }
   async function friends(){
     await identity();const rows=await rpc('friends');
