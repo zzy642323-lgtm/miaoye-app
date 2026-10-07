@@ -4,3 +4,7 @@ node_modules
 .meoo
 *.log
 tests
+.cloud-qa
+src/supabase
+web/downloads/miaoye-0.16.0-test.apk
+web/downloads/miaoye-0.17.0-test.apk
