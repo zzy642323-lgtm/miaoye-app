@@ -14,5 +14,7 @@ test('cloud proxy rejects other origins, missing JWT, traversal and privileged A
     assert.equal((await fetch(base+'/cloud/storage/v1/object/public/miaoye-private/a/b/c.json')).status,404);
     const preflight=await fetch(base+'/cloud/rest/v1/miaoye_backups',{method:'OPTIONS',headers:{Origin:'https://appassets.androidplatform.net'}});assert.equal(preflight.status,204);assert.equal(preflight.headers.get('access-control-allow-origin'),'https://appassets.androidplatform.net');
     const result=await fetch(base+'/cloud/rest/v1/miaoye_backups?select=*',{headers:{Authorization:'Bearer user.token',Origin:'https://appassets.androidplatform.net'}});assert.equal(result.status,200);assert.equal(calls.length,1);assert.equal(calls[0].opts.headers.Authorization,'Bearer user.token');assert.equal(calls[0].opts.headers.apikey,'public-anon');assert.equal(calls[0].url,'https://cloud.test/sb-api/rest/v1/miaoye_backups?select=*');assert.doesNotMatch(JSON.stringify(calls),/NEVER_FORWARD/);
+    await fetch(base+'/cloud/storage/v1/object/miaoye-private/11111111-1111-4111-8111-111111111111/22222222-2222-4222-8222-222222222222/33333333-3333-4333-8333-333333333333.json',{method:'DELETE',headers:{Authorization:'Bearer user.token'}});
+    assert.equal(calls[1].url,'https://cloud.test/sb-api/storage/v1/object/miaoye-private');assert.equal(JSON.parse(calls[1].opts.body).prefixes.length,1);
   }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
 });

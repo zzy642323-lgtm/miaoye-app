@@ -8,7 +8,7 @@ const headers={apikey:process.env.SUPABASE_ANON_KEY};
 const settings=await(await fetch(process.env.SUPABASE_URL+'/auth/v1/settings',{headers})).json();
 assert.equal(settings.mailer_autoconfirm,true,'Do not send test emails');
 const server=createServer().listen(0,'127.0.0.1');await once(server,'listening');
-const base='http://127.0.0.1:'+server.address().port+'/cloud/';
+const base=process.env.MIAOYE_CLOUD_TEST_BASE||'http://127.0.0.1:'+server.address().port+'/cloud/';
 const users=[];let objectPath;
 async function call(path,body,token,method=body?'POST':'GET'){
   const r=await fetch(base+path,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined});
@@ -29,7 +29,7 @@ try{
   const refresh=await call('auth/v1/token?grant_type=refresh_token',{refresh_token:a.refresh_token});assert.equal(refresh.status,200);a.access_token=refresh.data.access_token;
   console.log('PASS: real signup, password login, JWT refresh, private upload/download and two-account isolation');
 }finally{
-  if(objectPath&&users[0])await call('storage/v1/object/miaoye-private/'+objectPath,null,users[0].access_token,'DELETE');
+  if(objectPath&&users[0]){const removed=await call('storage/v1/object/miaoye-private/'+objectPath,null,users[0].access_token,'DELETE');assert.equal(removed.status,200);}
   for(const user of users){await call('rest/v1/miaoye_backups?user_id=eq.'+user.user.id,null,user.access_token,'DELETE');}
   await fs.mkdir('.cloud-qa',{recursive:true});await fs.writeFile('.cloud-qa/cleanup.sql',"delete from auth.users where id in ("+users.map(x=>"'"+x.user.id+"'").join(',')+");");
   server.closeAllConnections();await new Promise(resolve=>server.close(resolve));

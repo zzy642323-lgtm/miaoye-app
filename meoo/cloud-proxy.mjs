@@ -21,7 +21,14 @@ export async function cloudProxy(req, res, url, env=process.env, fetcher=fetch) 
     for await(const chunk of req){size+=chunk.length;if(size>50*1024*1024){send(413,{error:'备份超过 50 MB，请减少照片后重试。'});return true;}chunks.push(chunk);}
     const upstreamHeaders={apikey:env.SUPABASE_ANON_KEY,Authorization:req.headers.authorization||'Bearer '+env.SUPABASE_ANON_KEY,Origin:'https://s7ianzbg94fw.meoo.run','OneDay-App-Id':'s7ianzbg94fw','X-Meoo-Source':'local-dev'};
     for(const key of ['content-type','prefer','x-upsert'])if(req.headers[key])upstreamHeaders[key]=req.headers[key];
-    const upstream=await fetcher(env.SUPABASE_URL.replace(/\/$/,'')+'/'+target+url.search,{method:req.method,headers:upstreamHeaders,body:chunks.length?Buffer.concat(chunks):undefined,signal:AbortSignal.timeout(120000),redirect:'error'});
+    let upstreamPath=target,body=chunks.length?Buffer.concat(chunks):undefined;
+    // Supabase deletes objects through the bucket endpoint with a prefixes array.
+    if(req.method==='DELETE'&&target.startsWith('storage/v1/object/miaoye-private/')){
+      upstreamPath='storage/v1/object/miaoye-private';
+      body=JSON.stringify({prefixes:[target.slice('storage/v1/object/miaoye-private/'.length)]});
+      upstreamHeaders['content-type']='application/json';
+    }
+    const upstream=await fetcher(env.SUPABASE_URL.replace(/\/$/,'')+'/'+upstreamPath+url.search,{method:req.method,headers:upstreamHeaders,body,signal:AbortSignal.timeout(120000),redirect:'error'});
     res.writeHead(upstream.status,{...headers,'Content-Type':upstream.headers.get('content-type')||'application/json'});
     res.end(Buffer.from(await upstream.arrayBuffer()));
   }catch{send(502,{error:'云端暂时连接不上，本机手账仍然保留。'});}
