@@ -1,5 +1,5 @@
 // Forward only the public Supabase API with the user's JWT. Never use the service role.
-const allowed = /^(?:auth\/v1\/(?:token|signup|logout|user|verify|recover)|rest\/v1\/miaoye_backups|storage\/v1\/object\/(?:authenticated\/)?miaoye-private\/[a-f0-9-]+\/[a-f0-9-]+\/[a-f0-9-]+\.json)$/;
+const allowed = /^(?:auth\/v1\/(?:token|signup|logout|user|verify|recover)|rest\/v1\/miaoye_backups|rest\/v1\/rpc\/miaoye_social_(?:me|friends|request|friend_action|publish|feed|like|unshare)|storage\/v1\/object\/(?:authenticated\/)?miaoye-private\/[a-f0-9-]+\/[a-f0-9-]+\/[a-f0-9-]+\.json)$/;
 export async function cloudProxy(req, res, url, env=process.env, fetcher=fetch) {
   if (!url.pathname.startsWith('/cloud/')) return false;
   const origin=req.headers.origin;

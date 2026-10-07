@@ -106,5 +106,5 @@ export function initCloudBackup({local,openModal,toast,esc}){
       remember({...s,expires_at:Date.now()/1000+s.expires_in});status='已登录，尚未上传本机内容';panel();
     }catch(error){show(error.message);toast(error.message);}finally{form.dataset.pending='false';buttons.forEach(b=>b.disabled=false);}
   },true);
-  window.addEventListener('online',changed);changed();return {changed};
+  window.addEventListener('online',changed);changed();return {changed,panel,request,getUser:()=>session?.user||null};
 }
