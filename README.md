@@ -49,3 +49,6 @@ node server.mjs
 使用说明：original/docs/安卓版联网与云备份使用说明.md
 
 后台设置：meoo/migrations/cloud-backups.sql 在原秒悟项目已执行，RLS 与私密存储策略已启用。服务端需要平台注入 SUPABASE_URL 与 SUPABASE_ANON_KEY，不能把管理密钥写进网页或 APK。
+
+
+0.19 修正版：兼容没有 AbortSignal.timeout 的旧 Android WebView，注册登录表单显示输入错误、连接进度和失败原因。请从线上 android.html 下载 0.19 覆盖安装，保留原有手账。38 项原应用测试和 2 项部署测试通过。
