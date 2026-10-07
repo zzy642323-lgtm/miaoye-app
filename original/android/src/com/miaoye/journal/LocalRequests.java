@@ -4,12 +4,13 @@ package com.miaoye.journal;
 public final class LocalRequests {
   public static final String HOST = "appassets.androidplatform.net";
   public static final String HOME_URL = "https://" + HOST + "/index.html";
-  public enum Route { LOCAL, EMBEDDED, BLOCKED }
+  public enum Route { LOCAL, EMBEDDED, CLOUD, BLOCKED }
   private LocalRequests() {}
 
   public static Route route(String scheme, String host, String path) {
     // WebView also intercepts data: resources. They never need a network response.
     if ("data".equals(scheme) || "blob".equals(scheme) || "about".equals(scheme)) return Route.EMBEDDED;
+    if ("https".equals(scheme) && "s7ianzbg94fw.meoo.run".equals(host) && path != null && path.startsWith("/cloud/") && !path.contains("..") && !path.contains("\\")) return Route.CLOUD;
     if (!"https".equals(scheme) || !HOST.equals(host)) return Route.BLOCKED;
     if (path != null && (path.contains("..") || path.contains("\\"))) return Route.BLOCKED;
     return Route.LOCAL;

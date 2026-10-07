@@ -32,7 +32,9 @@ for name in files:
 deployment = workspace / 'miaoye-meoo'
 for item in deployment.rglob('*'):
     relative = item.relative_to(deployment)
-    if any(part in {'.git', '.env', '.meoo', 'node_modules'} for part in relative.parts) or relative.name.startswith('.env') or relative.suffix == '.log':
+    if relative.parts[:2] == ('src', 'supabase'):
+        continue  # CLI-generated connection files are unnecessary for the server backup.
+    if any(part in {'.git', '.env', '.meoo', 'node_modules', '.cloud-qa'} for part in relative.parts) or relative.name.startswith('.env') or relative.suffix == '.log':
         continue
     if not item.is_file():
         continue

@@ -2,6 +2,8 @@ import http from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {cloudProxy} from './cloud-proxy.mjs';
+try { process.loadEnvFile(); } catch (error) { if(error.code !== 'ENOENT') throw error; }
 
 const web = path.resolve(fileURLToPath(new URL('./web/', import.meta.url)));
 const types = {'.mjs':'text/javascript; charset=utf-8','.wasm':'application/wasm','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.apk':'application/vnd.android.package-archive'};
@@ -13,6 +15,7 @@ export function createServer() {
     };
     try {
       const url = new URL(req.url, 'http://localhost');
+      if (await cloudProxy(req,res,url)) return;
       const name = decodeURIComponent(url.pathname);
       if (name === '/api/me' && ['GET','HEAD'].includes(req.method)) return send(200, types['.js'].replace('text/javascript','application/json'), '{"authenticated":false}');
       if (name.startsWith('/api/')) return send(401, 'application/json; charset=utf-8', '{"error":"此版本使用设备上的手账，暂未开放云同步。"}');

@@ -19,6 +19,10 @@ public final class LocalPagesTest {
     checkRoute("http://appassets.androidplatform.net/index.html", LocalRequests.Route.BLOCKED);
     checkRoute("file:///sdcard/index.html", LocalRequests.Route.BLOCKED);
     checkRoute("https://appassets.androidplatform.net/%2e%2e/AndroidManifest.xml", LocalRequests.Route.BLOCKED);
+    checkRoute("https://s7ianzbg94fw.meoo.run/cloud/status", LocalRequests.Route.CLOUD);
+    checkRoute("https://s7ianzbg94fw.meoo.run/index.html", LocalRequests.Route.BLOCKED);
+    checkRoute("https://s7ianzbg94fw.meoo.run.evil.test/cloud/status", LocalRequests.Route.BLOCKED);
+    checkRoute("http://s7ianzbg94fw.meoo.run/cloud/status", LocalRequests.Route.BLOCKED);
     String apk = args[0]; int checked = 0;
     URI home = URI.create(LocalRequests.HOME_URL);
     try(InputStream in = LocalPages.open(apk,"web" + LocalRequests.pagePath(home.getPath()))) {

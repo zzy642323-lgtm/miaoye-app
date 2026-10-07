@@ -40,3 +40,12 @@ node server.mjs
 安卓构建见 `original/android/README.md`。官方 Android 工具、JDK 和本机签名密钥需单独准备；签名密钥不在仓库内。重新生成密钥会导致无法覆盖升级原测试包。
 
 仓库不包含部署凭据、签名私钥、用户照片或用户手账。素材授权说明保留于各素材目录；未授予整个项目额外开源许可。
+
+## 0.18 安卓联网与云备份
+
+已使用原秒悟项目的免费云服务接入用户名密码登录、私密快照备份、联网重试与换手机恢复。每台设备保留最近 3 份；单份最多 50 MB，项目合计免费空间 1 GB。首次上传由用户主动开启。原插画和离线本机抠图保留，APK 用原签名覆盖升级。
+
+下载：https://s7ianzbg94fw.meoo.run/android.html
+使用说明：original/docs/安卓版联网与云备份使用说明.md
+
+后台设置：meoo/migrations/cloud-backups.sql 在原秒悟项目已执行，RLS 与私密存储策略已启用。服务端需要平台注入 SUPABASE_URL 与 SUPABASE_ANON_KEY，不能把管理密钥写进网页或 APK。

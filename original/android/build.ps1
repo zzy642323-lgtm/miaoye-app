@@ -39,7 +39,7 @@ $key=Join-Path $toolRoot 'miaoye-test.keystore'
 if(-not(Test-Path -LiteralPath $key)){& (Join-Path $jdk 'bin/keytool.exe') -genkeypair -keystore $key -storepass android -keypass android -alias miaoye-test -dname 'CN=Miaoye Test, O=Miaoye, C=SG' -keyalg RSA -keysize 2048 -validity 10000;Check-Exit}
 $downloads='web/downloads'
 New-Item -ItemType Directory -Force $downloads | Out-Null
-$apk=Join-Path $downloads 'miaoye-0.17.0-test.apk'
+$apk=Join-Path $downloads 'miaoye-0.18.0-test.apk'
 & (Join-Path $tools 'apksigner.bat') sign --v4-signing-enabled false --ks $key --ks-pass pass:android --ks-key-alias miaoye-test --out $apk (Join-Path $build 'aligned.apk');Check-Exit
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk;Check-Exit
 New-Item -ItemType Directory -Force (Join-Path $build 'verification') | Out-Null

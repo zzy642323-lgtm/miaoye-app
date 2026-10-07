@@ -2,3 +2,4 @@
 .meoo
 node_modules
 *.log
+.cloud-qa
