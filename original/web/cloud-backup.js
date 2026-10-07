@@ -1,3 +1,4 @@
+import {initAccountProfile} from './social-profile.js';
 import {cloudFetch} from './cloud-transport.js';
 const BASE='https://s7ianzbg94fw.meoo.run/cloud/';
 const SESSION='miaoye-cloud-session', OWNER='miaoye-cloud-owner', AUTO='miaoye-cloud-auto';
@@ -42,6 +43,7 @@ export function initCloudBackup({local,openModal,toast,esc}){
     if(auth){if(!session)throw Error('请先登录。');if((session.expires_at||0)<Date.now()/1000+60){const s=await request('auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:session.refresh_token})},false);remember({...s,expires_at:Date.now()/1000+s.expires_in});}}
     return cloudJson(BASE+path,{...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),...(auth?{Authorization:'Bearer '+session.access_token}:{}),...options.headers}},auth?120000:90000);
   }
+  const accountProfile=initAccountProfile({request,getUser:()=>session?.user||null,openModal,toast,esc,onSaved:panel});
   async function list(){return request('rest/v1/miaoye_backups?select=*&order=created_at.desc&limit=100');}
   async function backup(enable=false){
     if(busy)return;if(!session)throw Error('请先登录。');
@@ -67,7 +69,8 @@ export function initCloudBackup({local,openModal,toast,esc}){
   function changed(){clearTimeout(timer);if(session&&localStorage.getItem(AUTO)==='true'&&localStorage.getItem(OWNER)===session.user.id)timer=setTimeout(()=>backup().catch(error=>{status=error.message;}),30000);}
   function panel(){
     const signed=!!session;
-    openModal(`<h2>云端收好小日子</h2><p class="muted">照片、手账、草稿和猫咪进度私密保存到秒悟。离线仍可记录，每台设备保留最近 3 份备份。</p>${signed?`<p>${esc(session.user.email?.replace(/@meoo\.local$/,'')||'已登录')}</p><p class="small muted">${esc(status==='未备份'?localStorage.getItem('miaoye-cloud-last')||status:status)}</p><button class="button primary wide" data-cloud="backup">备份本机手账并开启自动备份</button><button class="button secondary wide" data-cloud="list">查看云端备份 / 换手机恢复</button><button class="text-button" data-cloud="pause">${localStorage.getItem(AUTO)==='true'?'暂停自动备份':'自动备份未开启'}</button><button class="text-button" data-cloud="logout">退出云账号（保留本机手账）</button>`:`<form id="cloud-login" novalidate><label class="field-label">用户名（3—32 位字母、数字或下划线）</label><input class="input" name="username" pattern="[A-Za-z0-9_]{3,32}" minlength="3" maxlength="32" autocomplete="username" required><label class="field-label">密码（至少 8 位）</label><input class="input" name="password" type="password" minlength="8" autocomplete="current-password" required><p id="cloud-feedback" class="small muted" role="status" aria-live="polite">填写用户名和密码，然后选择登录或注册。</p><button type="submit" class="button primary wide" name="mode" value="login">登录云账号</button><button type="submit" class="button secondary wide" name="mode" value="signup">注册云账号</button></form><p class="small muted">用户名与密码登录，无需邮件或短信验证码。请记好账号和密码。</p>`}<button class="text-button" data-action="reset-local">清空本机内容 / 重新开始</button><p class="small muted">整个备份上限 50 MB；项目免费存储合计 1 GB。首次备份由你主动开启，不会自动上传未授权的本机内容。</p>`);
+    openModal(`<h2>云端收好小日子</h2><p class="muted">照片、手账、草稿和猫咪进度私密保存到秒悟。离线仍可记录，每台设备保留最近 3 份备份。</p>${signed?`<div id="cloud-profile-card">${accountProfile.card(session.user.email?.replace(/@meoo\.local$/,'')||'已登录')}</div><button class="button secondary wide" data-cloud="edit-profile">编辑我的头像和昵称</button><p class="small muted">${esc(status==='未备份'?localStorage.getItem('miaoye-cloud-last')||status:status)}</p><button class="button primary wide" data-cloud="backup">备份本机手账并开启自动备份</button><button class="button secondary wide" data-cloud="list">查看云端备份 / 换手机恢复</button><button class="text-button" data-cloud="pause">${localStorage.getItem(AUTO)==='true'?'暂停自动备份':'自动备份未开启'}</button><button class="text-button" data-cloud="logout">退出云账号（保留本机手账）</button>`:`<form id="cloud-login" novalidate><label class="field-label">用户名（3—32 位字母、数字或下划线）</label><input class="input" name="username" pattern="[A-Za-z0-9_]{3,32}" minlength="3" maxlength="32" autocomplete="username" required><label class="field-label">密码（至少 8 位）</label><input class="input" name="password" type="password" minlength="8" autocomplete="current-password" required><p id="cloud-feedback" class="small muted" role="status" aria-live="polite">填写用户名和密码，然后选择登录或注册。</p><button type="submit" class="button primary wide" name="mode" value="login">登录云账号</button><button type="submit" class="button secondary wide" name="mode" value="signup">注册云账号</button></form><p class="small muted">用户名与密码登录，无需邮件或短信验证码。请记好账号和密码。</p>`}<button class="text-button" data-action="reset-local">清空本机内容 / 重新开始</button><p class="small muted">整个备份上限 50 MB；项目免费存储合计 1 GB。首次备份由你主动开启，不会自动上传未授权的本机内容。</p>`);
+    if(signed)accountProfile.refreshCard().catch(()=>{});
   }
   document.addEventListener('click',async event=>{
     const profile=event.target.closest('[data-action="profile"]');
@@ -75,6 +78,7 @@ export function initCloudBackup({local,openModal,toast,esc}){
     const button=event.target.closest('[data-cloud]');if(!button)return;event.stopImmediatePropagation();if(busy)return toast('正在备份，请稍等完成。');button.disabled=true;
     try{
       const action=button.dataset.cloud;
+      if(action==='edit-profile')await accountProfile.edit();
       if(action==='backup'){await backup(true);panel();}
       if(action==='pause'){localStorage.removeItem(AUTO);clearTimeout(timer);toast('已暂停自动备份。');panel();}
       if(action==='logout'){await request('auth/v1/logout',{method:'POST'}).catch(()=>{});clearTimeout(timer);remember(null);localStorage.removeItem(AUTO);panel();}

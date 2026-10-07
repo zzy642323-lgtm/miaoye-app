@@ -14,7 +14,7 @@ $obsoleteSocial=Join-Path $project '.sites-runtime/android-build/assets/web/soci
 if(Test-Path -LiteralPath $obsoleteSocial){Remove-Item -LiteralPath $obsoleteSocial}
 Get-ChildItem (Join-Path $project 'web') -File | Where-Object {$_.Name -notin @('app-v1.js','social.js','cutout-qa.html')} | Copy-Item -Destination $assetRoot -Force
 New-Item -ItemType Directory -Force (Join-Path $assetRoot 'assets') | Out-Null
-Get-ChildItem (Join-Path $project 'web/assets') -File | Where-Object {$_.Extension -ne '.png' -and $_.Name -ne 'cats.png'} | Copy-Item -Destination (Join-Path $assetRoot 'assets') -Force
+Get-ChildItem (Join-Path $project 'web/assets') -File | Where-Object {($_.Extension -ne '.png' -or $_.Name -eq 'cat-actions-v22.png') -and $_.Name -ne 'cats.png'} | Copy-Item -Destination (Join-Path $assetRoot 'assets') -Force
 foreach($folder in @('vendor','models')){Copy-Item -LiteralPath (Join-Path $project ('web/'+$folder)) -Destination $assetRoot -Recurse -Force}
 # Remove superseded sprite atlases only from the generated APK staging directory.
 foreach($name in @('cat-actions-v4.webp','cat-actions-v7.webp','cat-actions-v8.webp','stickers-gouache.webp','cats-gouache.webp')){
@@ -39,7 +39,7 @@ $key=Join-Path $toolRoot 'miaoye-test.keystore'
 if(-not(Test-Path -LiteralPath $key)){& (Join-Path $jdk 'bin/keytool.exe') -genkeypair -keystore $key -storepass android -keypass android -alias miaoye-test -dname 'CN=Miaoye Test, O=Miaoye, C=SG' -keyalg RSA -keysize 2048 -validity 10000;Check-Exit}
 $downloads='web/downloads'
 New-Item -ItemType Directory -Force $downloads | Out-Null
-$apk=Join-Path $downloads 'miaoye-0.21.0-test.apk'
+$apk=Join-Path $downloads 'miaoye-0.22.0-test.apk'
 & (Join-Path $tools 'apksigner.bat') sign --v4-signing-enabled false --ks $key --ks-pass pass:android --ks-key-alias miaoye-test --out $apk (Join-Path $build 'aligned.apk');Check-Exit
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk;Check-Exit
 New-Item -ItemType Directory -Force (Join-Path $build 'verification') | Out-Null

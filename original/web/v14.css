@@ -4,3 +4,5 @@
 .cat-sprite{background-image:url('./assets/cat-actions-v14.webp')!important;background-size:600% 500%!important;background-position:0 0!important}
 .cat-sprite[data-cat='1']{background-position:0 25%!important}.cat-sprite[data-cat='2']{background-position:0 50%!important}.cat-sprite[data-cat='3']{background-position:0 75%!important}.cat-sprite[data-cat='4']{background-position:0 100%!important}.cat-sprite[data-cat='5']{background-position:60% 0!important}
 .cat-pose,.cat-sprite{clip-path:inset(12% 2% 0%)}
+
+.cat-pose,.cat-sprite{background-image:none!important;clip-path:none!important;aspect-ratio:1!important}.cat-pose>svg,.cat-sprite>svg{display:block;width:100%;height:100%;overflow:hidden;pointer-events:none}
