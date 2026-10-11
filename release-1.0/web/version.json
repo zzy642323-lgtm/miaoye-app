@@ -1,8 +1,8 @@
 {
-  "version": "1.0.7",
-  "versionCode": 107,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.7.apk",
-  "sha256": "e5029057eb595a19eecb84a77c7706bead39a44fed878171c552cac68c77da8f",
-  "notes": "自由与标准模式布局独立，只共享图层顺序；日期编辑仅修改年月日；相册保存与好友小猫吐槽优化。",
-  "size": 3668593
+  "version": "1.0.9",
+  "versionCode": 109,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.9.apk",
+  "sha256": "2ed4f9876b67abd51718d1da957c763c6077431e46c088b8eca27eb5136a6463",
+  "notes": "好友小猫改用 AI 自然回应，结合手账情绪与细节提问，移除括号引用与固定模板。",
+  "size": 3676861
 }

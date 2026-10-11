@@ -24,14 +24,36 @@ const events=[
 [/生日/,['生日这一页，好好留给今天的你。','生日！蛋糕上的奶油有我的份吗？','这一年的生日，愿你过得安心。','生日这一页要收藏，下一年还能回来看看。','生日快乐……我悄悄送你一个小爪印。']],
 [/花束|鲜花|荷花|莲花|植物/,null,'flower']
 ];
-function friendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),event=events.find(([rule])=>rule.test(text));let line,topic;
+function seedFriendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),event=events.find(([rule])=>rule.test(text));let line,topic;
 if(event){topic=event[2]||'event';const subject=text.match(event[0])[0];line=event[1]?.[cat];if(!line){const specific={food:[`${subject}这一口，值得慢慢享受。`,`${subject}都记进本子了，我的那一口呢？`,`${subject}的这一刻，慢慢留在这一页。`,`${subject}也能成为今天的小收藏！`,`${subject}……我可以凑近闻一下吗？`],trip:[`${subject}这段路，慢慢走也很好。`,`${subject}可以，回来记得给我带零食。`,`${subject}的这一刻，我想安静陪你看看。`,`${subject}又多了一页，下次想听你讲路上的发现。`,`${subject}……下次能不能带上我？`],flower:[`${subject}的温柔，收在这一页刚刚好。`,`${subject}很漂亮，旁边有我的零食吗？`,`${subject}这一页，我想安静多看一会儿。`,`${subject}值得收藏，想知道你为什么选中了它。`,`${subject}好漂亮……我轻轻盖个爪印。`]};line=specific[topic][cat]}}
 else if(text.trim()&&text.trim()!=='今天的小日子'){topic='written';const clauses=text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子');const fragment=(clauses.find(s=>s!==context.title)||clauses[0]||text).slice(0,18);line=[`你写的「${fragment}」，我想陪你多读一遍。`,`「${fragment}」我记住了，讲完这一页再一起吃点东西？`,`「${fragment}」留在这里，慢慢读就好。`,`「${fragment}」让我好奇，这一刻为什么想记下来？`,`「${fragment}」……我有认真听哦。`][cat]}
 else{topic='photo';line=lines.photo[cat]}
 // A second grounded reply quotes the actual writing rather than introducing unrelated topics.
 if(variant%2&&text.trim()&&topic!=='photo'){const fragments=text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子');const fragment=(fragments[variant%fragments.length]||text).slice(0,16);line=[`「${fragment}」这一段，也值得温柔收好。`,`「${fragment}」这段我听到了，先记好再去吃饭。`,`「${fragment}」，我安静地陪你读这一段。`,`「${fragment}」这段，我想听你再讲一点。`,`「${fragment}」……我会悄悄记住的。`][cat]}
 return {topic,text:line,trait:traits[cat]}}
-window.CatVoice={response,friendResponse,journalText,traits};
+const writtenReplies=[
+ ['这一段，想陪你再读一次。','这一刻，也值得被好好照顾。','不用急着翻页，我陪你停一会儿。','这件小事，给今天留了一个位置。','这段话，可以留给以后的自己。','读到这里，想轻轻抱抱写下它的人。'],
+ ['这段故事听完了，我的零食还没拆。','这件事记住了，我的爪印也想占个位。','我认真听着呢，尾巴已经坐得很端正了。','这一段值得留着，猫猫已经点头了。','故事还没讲完吧？我把耳朵竖起来了。','这页不翻走，我还想在旁边蹲一会儿。'],
+ ['这一段，我想安静地多看一会儿。','不用解释更多，这些字已经留下了痕迹。','读到这里，我把脚步放轻一点。','这一刻，适合慢慢翻回来读。','我在这里，陪这段话待一会儿。','这段记好了，先让脑袋安静一下。'],
+ ['这一段，为什么特别想记下来？','这件事，后来还有什么小发现？','这一刻前后，还有什么想收藏的细节？','这些字，是今天最想留下的部分吗？','我把这段圈起来了，还想听你多讲一点。','这页里，你最想让以后记住哪一点？'],
+ ['这一段……我有认真读哦。','这件事，我会悄悄记在心里。','我不太敢打扰，但还想听你讲一点。','这一刻，我想轻轻盖一个爪印。','这段话……能让我再看一会儿吗？','我把小爪子收好，安静陪你翻这一页。']
+];
+const photoReplies=[
+ ['这一页的照片收好啦。你最想留下哪一刻？','还不知道照片里的故事。愿意给我讲一点吗？','我陪你看这一页。想先从哪张照片说起？','这一页先留着。以后补一句话也很好。','照片里的细节，等你慢慢告诉我。','我在这儿等着听，这一页为什么想收好。'],
+ ['这一页我蹲好啦。照片里的故事，讲给我听听？','先不猜照片里有什么。你来讲，我来竖耳朵。','这些照片记住哪一刻？我想听原版故事。','照片收好了。我的爪印可以贴旁边吗？','我不抢着猜啦。这一页有什么想告诉我？','这一页先留好。讲故事的时候叫我一声。'],
+ ['照片先安静留在这里。故事可以慢慢讲。','我陪你看这一页。不用急着解释。','这一刻先收好。想说时，我再听。','还不知道照片的故事。我在旁边等一会儿。','这一页不急着翻走。慢慢看也很好。','照片里的那一刻，愿意说时再告诉我。'],
+ ['这一页有什么小发现？想听你自己讲。','哪张照片最想留着？为什么选它呢？','照片里的故事，能从头讲给我听吗？','这一刻发生了什么？我把耳朵竖起来了。','照片旁边，最想补上哪句话？','这页的主角是谁？等你告诉我，我再记。'],
+ ['这一页……我想听你讲讲。','还不知道照片里是什么。我先乖乖等着。','我悄悄看了一眼。能讲一点故事给我吗？','这一刻先留好……我陪你慢慢看。','照片收好啦。想说的时候叫我一下。','我不乱猜哦。这一页等你慢慢讲。']
+];
+function friendReplies(context={},cat=window.RecordArt?.adopted().cat||0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),first=seedFriendResponse(context,cat),fragments=[...new Set(text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子'))];
+if(!fragments.length)return photoReplies[cat];
+const pool=[first.text];
+// Include every written event, instead of responding to only the first matched theme.
+for(const [rule,,type] of events){const match=text.match(rule);if(match){const fact=match[0];pool.push(seedFriendResponse({note:fact},cat).text);const follow=type==='food'?[`这次的${fact}，最喜欢的是哪一口？`,`下次还想选${fact}吗？`,`给${fact}留了一页，它在今天排第几名？`]:type==='trip'?[`${fact}这一路，最想留下哪一段？`,`下次${fact}，还想走同样的路线吗？`,`除了${fact}，路上还有什么小发现？`]:type==='flower'?[`选中${fact}，是喜欢它的颜色还是别的细节？`,`这页的${fact}，想放在哪个位置收藏？`,`下次翻到${fact}，还会想起今天哪一刻？`]:/奖/.test(fact)?['知道拿奖的那一刻，第一反应是什么？','获奖这件事，最想先告诉谁？','这份奖的背后，哪一段努力最想记住？']:/作品集|网站|项目|作业|论文/.test(fact)?[`关于${fact}，这一页之后准备做哪一步？`,`${fact}里最花心思的地方，想单独记一页吗？`,`忙${fact}的时候，什么细节最想留下？`]:/加班|熬夜|疲惫|累了/.test(fact)?['这页写着辛苦，接下来想怎么歇一会儿？','忙到累的时候，有没有给自己留一点休息？','今天这些辛苦，想先把哪件事放下来？']:/难过|伤心|焦虑|失眠|委屈/.test(fact)?['这段心事，想有人听听，还是先安静待着？','这一页的不好受，不用急着变成开心。','说到这里，想先停一会儿也可以。']:['生日这一页，最想留下哪个瞬间？','今年生日，有什么想悄悄许下的愿望？','生日这天，哪件小事最想以后再读？'];const voices=['我陪你慢慢想。','猫猫竖起耳朵了。','不急着回答。','这个细节我想收藏。','我……有认真听。'];for(const sentence of follow)pool.push(sentence+voices[cat])}}
+for(let i=0;i<writtenReplies[cat].length;i++){const fragment=fragments[(i+1)%fragments.length],short=Array.from(fragment).slice(0,18).join('');pool.push('「'+short+'」。'+writtenReplies[cat][i])}
+return [...new Set(pool)]}
+function friendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const replies=friendReplies(context,cat),index=Math.max(0,Math.floor(Number(variant)||0))%replies.length;return {topic:seedFriendResponse(context,cat).topic,text:replies[index],trait:traits[cat],count:replies.length}}
+window.CatVoice={response,friendResponse,friendReplies,journalText,traits};
 function textOnly(e){return !!e&&e.kind==='simple'&&!(e.library||[]).length}
 function thumbnail(e){return '<span class="text-preview" aria-label="纯文字手账"><small>一页心事</small><strong>'+escape(e.note||e.title)+'</strong><i>“</i></span>'}
 window.JournalPreview={textOnly,thumbnail};

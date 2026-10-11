@@ -1,0 +1,5 @@
+const fs=require('fs'),path=require('path');const release=path.resolve(__dirname,'..');process.loadEnvFile(path.join(release,'.env'));const base=new URL(process.env.SUPABASE_URL),key=process.env.SUPABASE_ANON_KEY;
+if(base.protocol!=='https:'||base.username||base.password||base.hash||base.search||!key)throw Error('Invalid public cloud configuration');
+let role;try{role=JSON.parse(Buffer.from(key.split('.')[1],'base64url')).role}catch{}if(role!=='anon')throw Error('Only the public anon key may be included in Android');
+const target=path.resolve(process.argv[2]);if(!target.startsWith(path.join(release,'.sites-runtime')+path.sep))throw Error('Invalid build destination');fs.mkdirSync(path.dirname(target),{recursive:true});
+fs.writeFileSync(target,'package com.miaoye.journal;\nfinal class CloudSettings { static final String BASE_URL='+JSON.stringify(base.href.replace(/\/$/,''))+'; static final String CAT_URL='+JSON.stringify(base.href.replace(/\/$/,'')+'/functions/v1/cat-reply')+'; static final String ANON_KEY='+JSON.stringify(key)+'; }\n');

@@ -14,7 +14,12 @@ public final class CloudTransport {
   try{
    if(!allowed(value)||!java.util.Arrays.asList("GET","POST","PUT","DELETE","PATCH").contains(method))throw new IOException("不支持的云请求");
    byte[] bytes=body.getBytes(StandardCharsets.UTF_8);if(bytes.length>52428800)throw new IOException("备份超过 50 MB");
-   connection=(HttpsURLConnection)new URL(value).openConnection();connection.setInstanceFollowRedirects(false);connection.setConnectTimeout(20000);connection.setReadTimeout(60000);connection.setRequestMethod(method);
+   boolean catRequest="/cloud/functions/v1/cat-reply".equals(new URL(value).getPath());
+   URL originalUrl=new URL(value);boolean authRequest=originalUrl.getPath().matches("/cloud/auth/v1/(token|signup|logout|user|verify|recover|resend|otp)");
+   if(catRequest&&(!"POST".equals(method)||new URL(value).getQuery()!=null))throw new IOException("不支持的小猫请求");
+   String target=catRequest?CloudSettings.CAT_URL:authRequest?CloudSettings.BASE_URL+originalUrl.getPath().substring(6)+(originalUrl.getQuery()==null?"":"?"+originalUrl.getQuery()):value;
+   connection=(HttpsURLConnection)new URL(target).openConnection();connection.setInstanceFollowRedirects(false);connection.setConnectTimeout(20000);connection.setReadTimeout(60000);connection.setRequestMethod(method);
+   if(catRequest||authRequest){connection.setRequestProperty("apikey",CloudSettings.ANON_KEY);connection.setRequestProperty("Authorization","Bearer "+CloudSettings.ANON_KEY);connection.setRequestProperty("Origin","https://s7ianzbg94fw.meoo.run");connection.setRequestProperty("OneDay-App-Id","s7ianzbg94fw");connection.setRequestProperty("X-Meoo-Source","local-dev");}
    JSONObject input=new JSONObject(headers);
    for(String key:new String[]{"Authorization","Content-Type","Prefer","X-Upsert"})if(input.has(key))connection.setRequestProperty(key,input.getString(key));
    if(bytes.length>0){connection.setDoOutput(true);connection.setFixedLengthStreamingMode(bytes.length);try(OutputStream output=connection.getOutputStream()){output.write(bytes);}}
