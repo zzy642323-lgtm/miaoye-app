@@ -1,8 +1,8 @@
 {
-  "version": "1.0.4",
-  "versionCode": 104,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.4.apk",
-  "sha256": "9420c66a382f4d8780da817e7f4083c17c0a77dbd6308dbf7273369f33c3afc6",
-  "notes": "移除刷新按钮，下拉时才显示提示，平时不占空间",
-  "size": 3644087
+  "version": "1.0.5",
+  "versionCode": 105,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.5.apk",
+  "sha256": "8aa32535a0cf271671d400a9e28d7ba9b3ee967d846695bb314125690ed5563b",
+  "notes": "修复好友申请与互看手账，新增好友备注和删除、看板锁与本子快捷记录，优化封面、抠图、小猫排序和 MIAO 图标",
+  "size": 3656303
 }

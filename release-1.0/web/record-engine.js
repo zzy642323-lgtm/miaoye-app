@@ -5,6 +5,10 @@ function solidMask(values,width,height){
  const n=width*height;if(values.length!==n)throw Error('Invalid mask size');
  const mask=new Uint8Array(n),outside=new Uint8Array(n),queue=new Int32Array(n);let head=0,tail=0;
  for(let i=0;i<n;i++)mask[i]=Number.isFinite(values[i])&&values[i]>=.38?1:0;
+ // Round narrow jagged edges and discard one-pixel wisps before finding islands.
+ const rounded=new Uint8Array(n);
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++){let count=0,total=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const xx=x+dx,yy=y+dy;if(xx>=0&&xx<width&&yy>=0&&yy<height){total++;count+=mask[yy*width+xx]}}rounded[y*width+x]=count>=Math.ceil(total*.55)?1:0;}
+ mask.set(rounded);
  const add=i=>{if(!mask[i]&&!outside[i]){outside[i]=1;queue[tail++]=i;}};
  for(let x=0;x<width;x++){add(x);add((height-1)*width+x);}for(let y=0;y<height;y++){add(y*width);add(y*width+width-1);}
  while(head<tail){const i=queue[head++],x=i%width,y=Math.floor(i/width);if(x)add(i-1);if(x<width-1)add(i+1);if(y)add(i-width);if(y<height-1)add(i+width);}
@@ -16,7 +20,7 @@ function solidMask(values,width,height){
   if(tail<=maxHole)for(let k=0;k<tail;k++)mask[queue[k]]=1;
  }
  // Keep disconnected real objects, remove only tiny specks away from their edges.
- visited.fill(0);const minIsland=Math.max(3,Math.floor(n*.00015));
+ visited.fill(0);const minIsland=Math.max(6,Math.floor(n*.00125));
  for(let seed=0;seed<n;seed++)if(mask[seed]&&!visited[seed]){
   head=0;tail=0;queue[tail++]=seed;visited[seed]=1;
   while(head<tail){const i=queue[head++],x=i%width,y=Math.floor(i/width);for(const next of [x?i-1:-1,x<width-1?i+1:-1,y?i-width:-1,y<height-1?i+width:-1])if(next>=0&&mask[next]&&!visited[next]){visited[next]=1;queue[tail++]=next;}}
