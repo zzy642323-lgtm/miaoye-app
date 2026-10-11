@@ -38,6 +38,14 @@ const writtenReplies=[
  ['这一段，为什么特别想记下来？','这件事，后来还有什么小发现？','这一刻前后，还有什么想收藏的细节？','这些字，是今天最想留下的部分吗？','我把这段圈起来了，还想听你多讲一点。','这页里，你最想让以后记住哪一点？'],
  ['这一段……我有认真读哦。','这件事，我会悄悄记在心里。','我不太敢打扰，但还想听你讲一点。','这一刻，我想轻轻盖一个爪印。','这段话……能让我再看一会儿吗？','我把小爪子收好，安静陪你翻这一页。']
 ];
+// Neutral replies also work for photo-only cards without inventing image details.
+const defaultExtras=[
+ ['今天想多聊一点，还是让我陪你坐一会儿？','小爪子借你牵一下，翻页也不着急。','你慢慢说，我的耳朵一直给你留着。','这一天里，有没有一个想重新过一遍的瞬间？','我挪近一点，陪你把今天收好。','没什么特别的事，也可以来找我呀。','要不要伸个懒腰？我先示范给你看。','今天给自己留一点空闲了吗？','你在这儿，我就舍不得去睡觉了。'],
+ ['我已经坐好了，谁也别把我从这页抱走。','你一翻本子，我就知道有热闹可以凑。','今天的猫猫评委决定先给你一个爪爪。','我没有偷懒，我是在认真陪你发呆。','这页能不能留个角落？我要趴一下。','你再点我一次，我就再陪你多待一会儿。','有什么新鲜事？我的耳朵已经上线了。','今天谁最会陪人？当然是眼前这只猫。','先把尾巴摆正，再听你慢慢讲。'],
+ ['窗边的位置留给你，我在旁边就好。','安静待一会儿，也算一起过了今天。','外面的事情可以晚点再想。','翻到这里，我就不往前走了。','想说话的时候，我一直都在。','今天有没有一刻，觉得什么也不做很好？','我把尾巴收好，不打扰你看这一页。','留一点时间给自己，哪怕只是发会儿呆。','不用把每一天都安排得满满的。'],
+ ['这一天要取个小标题，你会选什么？','如果只能留一个瞬间，你会选哪一个？','今天有没有什么出乎意料的小事？','下一次翻回来，你想先想起什么？','有没有一个细节，差点就被你忘掉了？','这页之后，你还想收集什么？','今天和昨天，有哪一点不一样？','如果把这一天讲给朋友听，你会从哪里开始？','我想多听一点，你愿意接着讲吗？'],
+ ['我挪过来一点，可以坐你旁边吗？','你叫我一声，我就不去别处了。','其实我还想陪你多待一会儿。','我的小爪子举起来了，想跟你打个招呼。','有些话慢慢说就好，我不催你。','你愿意讲的话，我会把耳朵竖起来。','今天有没有想偷偷留给自己的小事？','我躲在这页旁边，不是躲着你哦。','你再翻一页，我也跟着过去。']
+];
 const photoReplies=[
  ['这一页的照片收好啦。你最想留下哪一刻？','还不知道照片里的故事。愿意给我讲一点吗？','我陪你看这一页。想先从哪张照片说起？','这一页先留着。以后补一句话也很好。','照片里的细节，等你慢慢告诉我。','我在这儿等着听，这一页为什么想收好。'],
  ['这一页我蹲好啦。照片里的故事，讲给我听听？','先不猜照片里有什么。你来讲，我来竖耳朵。','这些照片记住哪一刻？我想听原版故事。','照片收好了。我的爪印可以贴旁边吗？','我不抢着猜啦。这一页有什么想告诉我？','这一页先留好。讲故事的时候叫我一声。'],
@@ -46,13 +54,13 @@ const photoReplies=[
  ['这一页……我想听你讲讲。','还不知道照片里是什么。我先乖乖等着。','我悄悄看了一眼。能讲一点故事给我吗？','这一刻先留好……我陪你慢慢看。','照片收好啦。想说的时候叫我一下。','我不乱猜哦。这一页等你慢慢讲。']
 ];
 function friendReplies(context={},cat=window.RecordArt?.adopted().cat||0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),first=seedFriendResponse(context,cat),fragments=[...new Set(text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子'))];
-if(!fragments.length)return photoReplies[cat];
+if(!fragments.length)return [...photoReplies[cat],...defaultExtras[cat]];
 const pool=[first.text];
 // Include every written event, instead of responding to only the first matched theme.
 for(const [rule,,type] of events){const match=text.match(rule);if(match){const fact=match[0];pool.push(seedFriendResponse({note:fact},cat).text);const follow=type==='food'?[`这次的${fact}，最喜欢的是哪一口？`,`下次还想选${fact}吗？`,`给${fact}留了一页，它在今天排第几名？`]:type==='trip'?[`${fact}这一路，最想留下哪一段？`,`下次${fact}，还想走同样的路线吗？`,`除了${fact}，路上还有什么小发现？`]:type==='flower'?[`选中${fact}，是喜欢它的颜色还是别的细节？`,`这页的${fact}，想放在哪个位置收藏？`,`下次翻到${fact}，还会想起今天哪一刻？`]:/奖/.test(fact)?['知道拿奖的那一刻，第一反应是什么？','获奖这件事，最想先告诉谁？','这份奖的背后，哪一段努力最想记住？']:/作品集|网站|项目|作业|论文/.test(fact)?[`关于${fact}，这一页之后准备做哪一步？`,`${fact}里最花心思的地方，想单独记一页吗？`,`忙${fact}的时候，什么细节最想留下？`]:/加班|熬夜|疲惫|累了/.test(fact)?['这页写着辛苦，接下来想怎么歇一会儿？','忙到累的时候，有没有给自己留一点休息？','今天这些辛苦，想先把哪件事放下来？']:/难过|伤心|焦虑|失眠|委屈/.test(fact)?['这段心事，想有人听听，还是先安静待着？','这一页的不好受，不用急着变成开心。','说到这里，想先停一会儿也可以。']:['生日这一页，最想留下哪个瞬间？','今年生日，有什么想悄悄许下的愿望？','生日这天，哪件小事最想以后再读？'];const voices=['我陪你慢慢想。','猫猫竖起耳朵了。','不急着回答。','这个细节我想收藏。','我……有认真听。'];for(const sentence of follow)pool.push(sentence+voices[cat])}}
 const fact=text.match(events.find(([rule])=>rule.test(text))?.[0]||/$^/)?.[0];
 if(fact){for(const sentence of writtenReplies[cat])pool.push(fact+'这件事，'+sentence)}
-else{pool.length=0;pool.push(...writtenReplies[cat])}
+else{pool.length=0;pool.push(...writtenReplies[cat],...defaultExtras[cat])}
 return [...new Set(pool)]}
 function friendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const replies=friendReplies(context,cat),index=Math.max(0,Math.floor(Number(variant)||0))%replies.length;return {topic:seedFriendResponse(context,cat).topic,text:replies[index],trait:traits[cat],count:replies.length}}
 window.CatVoice={response,friendResponse,friendReplies,journalText,traits};
