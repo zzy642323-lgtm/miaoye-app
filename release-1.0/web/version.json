@@ -1,8 +1,8 @@
 {
-  "version": "1.0.1",
-  "versionCode": 101,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.1.apk",
-  "sha256": "66e97511345021f688d570ba55f5f888c6f7dfbecd2acb45332c30e66957b309",
-  "notes": "轻量安装包、手机布局优化、使用教程与小猫彩蛋",
-  "size": 3639991
+  "version": "1.0.2",
+  "versionCode": 102,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.2.apk",
+  "sha256": "ad35423208108eeaa59a13ea002cd5caf7cb6c82ab1de4f2f1e1731102346c7b",
+  "notes": "加好友申请反馈与自由模式本子素材隔离",
+  "size": 3644086
 }
