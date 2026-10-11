@@ -1,8 +1,8 @@
 {
-  "version": "1.0.3",
-  "versionCode": 103,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.3.apk",
-  "sha256": "230c63b253061f8510d0b3986051ed3ad5fdb91cd132b378f5eb433c0444ea4c",
-  "notes": "修复手机下拉刷新，恢复卡片与详情点赞区域",
-  "size": 3644086
+  "version": "1.0.4",
+  "versionCode": 104,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.4.apk",
+  "sha256": "9420c66a382f4d8780da817e7f4083c17c0a77dbd6308dbf7273369f33c3afc6",
+  "notes": "移除刷新按钮，下拉时才显示提示，平时不占空间",
+  "size": 3644087
 }
