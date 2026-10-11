@@ -1,6 +1,6 @@
 # 喵页 · MiaoYe
 
-1.0.5 源码与构建位于 [release-1.0](release-1.0/README.md)，替代 0.22 界面，无旧版入口。
+1.0.7 源码与构建位于 [release-1.0](release-1.0/README.md)，替代 0.22 界面，无旧版入口。
 
 正式站点目标：https://s7ianzbg94fw.meoo.run
 安卓下载页目标：https://s7ianzbg94fw.meoo.run/android.html

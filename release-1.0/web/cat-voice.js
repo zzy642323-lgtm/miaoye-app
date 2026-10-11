@@ -12,7 +12,26 @@ ordinary:['普通的一天，也有值得好好抱住的瞬间。','今天记好
 photo:['这张素材也能替你记住今天，慢慢给它写句话吧。','照片收好啦。快告诉我，有没有好吃的？','不用急着解释，我陪你看这一张。','这张照片里有什么故事？给我一点线索吧！','我悄悄看了一眼……想听你讲它的故事。']};
 const sampleTopics={9:'food',5:'food',13:'food',8:'food',7:'food',2:'trip',15:'flower'};
 function response(context={},cat=window.RecordArt?.adopted().cat||0){const text=String(context.text||context.title||'')+' '+String(context.note||'');let topic=topicRules.find(([,r])=>r.test(text))?.[0];if(!topic){for(const asset of context.assets||context.library||[]){topic=sampleTopics[asset.sample]||topicRules.find(([,r])=>r.test(asset.label||''))?.[0];if(topic)break}}if(!topic){const photos=context.photos||[];for(const value of [context.photo,...photos]){topic=sampleTopics[value];if(typeof value==='string')topic=/cups|cans|cupcake/.test(value)?'food':/bike/.test(value)?'trip':/lotus/.test(value)?'flower':topic;if(topic)break}}if(!topic)topic=context.mood<=1?'tired':context.mood>=3?'happy':(context.assets?.length&&!text.trim()?'photo':'ordinary');return {topic,text:lines[topic][cat],trait:traits[cat]}}
-window.CatVoice={response,traits};
+// Only read written journal content, never infer a subject from an uploaded image.
+function journalText(context={}){return [...new Set([context.title,context.text,context.note,context.message,...(context.pages||[]).flatMap(p=>(p.items||[]).filter(i=>i.kind==='text').map(i=>i.text))].filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()))].join('。')}
+const events=[
+[/获奖|拿.{0,3}奖|得奖|国际大奖/,['奖拿到了，背后的努力也值得被抱抱。','大奖都拿了，庆祝菜单是不是也该升级？','这份获奖的喜悦，今晚可以慢慢回味。','获奖这一页我要收藏，努力终于有了回音。','拿奖了呀……我偷偷替你骄傲一下。']],
+[/作品集|网站|项目|作业|论文/,['这一页写着你的进度，忙完也记得歇歇。','忙这些事情费脑子，饭可别被你省掉了。','把这些进度写下来，也给脑袋留一点安静。','这些进度值得收好，以后翻回来能看见你走了多远。','你在认真做这些事……我就悄悄陪着。']],
+[/加班|熬夜|疲惫|累了/,['这一页都写累了，今天先放过自己吧。','累成这样，休息和吃饭都得排在前面。','这一页的疲惫我看到了，先安静歇一会儿。','今天收集够多了，接下来收集一点休息。','你写的这些辛苦……我想借你靠一下。']],
+[/难过|伤心|焦虑|失眠|委屈/,['这一页的不好受，我陪你慢慢放下来。','不好受的时候，别连一顿饭也为难自己。','这些心事不用急着解决，我在这里。','把这些心事写下来，已经是在照顾自己了。','我不太会安慰……但这一页我会陪你看完。']],
+[/奶茶|咖啡|蛋糕|火锅|早餐|晚餐|午饭|冰淇淋|小龙虾|烧烤|甜点/,null,'food'],
+[/旅行|散步|骑车|自行车|公园|海边|爬山/,null,'trip'],
+[/生日/,['生日这一页，好好留给今天的你。','生日！蛋糕上的奶油有我的份吗？','这一年的生日，愿你过得安心。','生日这一页要收藏，下一年还能回来看看。','生日快乐……我悄悄送你一个小爪印。']],
+[/花束|鲜花|荷花|莲花|植物/,null,'flower']
+];
+function friendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),event=events.find(([rule])=>rule.test(text));let line,topic;
+if(event){topic=event[2]||'event';const subject=text.match(event[0])[0];line=event[1]?.[cat];if(!line){const specific={food:[`${subject}这一口，值得慢慢享受。`,`${subject}都记进本子了，我的那一口呢？`,`${subject}的这一刻，慢慢留在这一页。`,`${subject}也能成为今天的小收藏！`,`${subject}……我可以凑近闻一下吗？`],trip:[`${subject}这段路，慢慢走也很好。`,`${subject}可以，回来记得给我带零食。`,`${subject}的这一刻，我想安静陪你看看。`,`${subject}又多了一页，下次想听你讲路上的发现。`,`${subject}……下次能不能带上我？`],flower:[`${subject}的温柔，收在这一页刚刚好。`,`${subject}很漂亮，旁边有我的零食吗？`,`${subject}这一页，我想安静多看一会儿。`,`${subject}值得收藏，想知道你为什么选中了它。`,`${subject}好漂亮……我轻轻盖个爪印。`]};line=specific[topic][cat]}}
+else if(text.trim()&&text.trim()!=='今天的小日子'){topic='written';const clauses=text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子');const fragment=(clauses.find(s=>s!==context.title)||clauses[0]||text).slice(0,18);line=[`你写的「${fragment}」，我想陪你多读一遍。`,`「${fragment}」我记住了，讲完这一页再一起吃点东西？`,`「${fragment}」留在这里，慢慢读就好。`,`「${fragment}」让我好奇，这一刻为什么想记下来？`,`「${fragment}」……我有认真听哦。`][cat]}
+else{topic='photo';line=lines.photo[cat]}
+// A second grounded reply quotes the actual writing rather than introducing unrelated topics.
+if(variant%2&&text.trim()&&topic!=='photo'){const fragments=text.split(/[。！？!?\n]/).map(s=>s.trim()).filter(s=>s&&s!=='今天的小日子');const fragment=(fragments[variant%fragments.length]||text).slice(0,16);line=[`「${fragment}」这一段，也值得温柔收好。`,`「${fragment}」这段我听到了，先记好再去吃饭。`,`「${fragment}」，我安静地陪你读这一段。`,`「${fragment}」这段，我想听你再讲一点。`,`「${fragment}」……我会悄悄记住的。`][cat]}
+return {topic,text:line,trait:traits[cat]}}
+window.CatVoice={response,friendResponse,journalText,traits};
 function textOnly(e){return !!e&&e.kind==='simple'&&!(e.library||[]).length}
 function thumbnail(e){return '<span class="text-preview" aria-label="纯文字手账"><small>一页心事</small><strong>'+escape(e.note||e.title)+'</strong><i>“</i></span>'}
 window.JournalPreview={textOnly,thumbnail};
