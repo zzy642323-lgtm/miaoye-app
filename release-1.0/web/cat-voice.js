@@ -15,14 +15,14 @@ function response(context={},cat=window.RecordArt?.adopted().cat||0){const text=
 // Only read written journal content, never infer a subject from an uploaded image.
 function journalText(context={}){return [...new Set([context.title,context.text,context.note,context.message,...(context.pages||[]).flatMap(p=>(p.items||[]).filter(i=>i.kind==='text').map(i=>i.text))].filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()))].join('。')}
 const events=[
-[/获奖|拿.{0,3}奖|得奖|国际大奖/,['奖拿到了，背后的努力也值得被抱抱。','大奖都拿了，庆祝菜单是不是也该升级？','这份获奖的喜悦，今晚可以慢慢回味。','获奖这一页我要收藏，努力终于有了回音。','拿奖了呀……我偷偷替你骄傲一下。']],
-[/作品集|网站|项目|作业|论文/,['这一页写着你的进度，忙完也记得歇歇。','忙这些事情费脑子，饭可别被你省掉了。','把这些进度写下来，也给脑袋留一点安静。','这些进度值得收好，以后翻回来能看见你走了多远。','你在认真做这些事……我就悄悄陪着。']],
-[/加班|熬夜|疲惫|累了/,['这一页都写累了，今天先放过自己吧。','累成这样，休息和吃饭都得排在前面。','这一页的疲惫我看到了，先安静歇一会儿。','今天收集够多了，接下来收集一点休息。','你写的这些辛苦……我想借你靠一下。']],
-[/难过|伤心|焦虑|失眠|委屈/,['这一页的不好受，我陪你慢慢放下来。','不好受的时候，别连一顿饭也为难自己。','这些心事不用急着解决，我在这里。','把这些心事写下来，已经是在照顾自己了。','我不太会安慰……但这一页我会陪你看完。']],
+[/获奖|拿.{0,3}奖|得奖|国际大奖|领奖|中奖/,['奖拿到了，背后的努力也值得被抱抱。','大奖都拿了，庆祝菜单是不是也该升级？','这份获奖的喜悦，今晚可以慢慢回味。','获奖这一页我要收藏，努力终于有了回音。','拿奖了呀……我偷偷替你骄傲一下。']],
+[/作品集|网站|项目|作业|论文|考试|复习|学习/,['这一页写着你的进度，忙完也记得歇歇。','忙这些事情费脑子，饭可别被你省掉了。','把这些进度写下来，也给脑袋留一点安静。','这些进度值得收好，以后翻回来能看见你走了多远。','你在认真做这些事……我就悄悄陪着。']],
+[/加班|熬夜|疲惫|累了|好累|疲劳|筋疲力尽/,['这一页都写累了，今天先放过自己吧。','累成这样，休息和吃饭都得排在前面。','这一页的疲惫我看到了，先安静歇一会儿。','今天收集够多了，接下来收集一点休息。','你写的这些辛苦……我想借你靠一下。']],
+[/难过|伤心|焦虑|失眠|委屈|烦躁|低落|崩溃/,['这一页的不好受，我陪你慢慢放下来。','不好受的时候，别连一顿饭也为难自己。','这些心事不用急着解决，我在这里。','把这些心事写下来，已经是在照顾自己了。','我不太会安慰……但这一页我会陪你看完。']],
 [/奶茶|咖啡|蛋糕|火锅|早餐|晚餐|午饭|冰淇淋|小龙虾|烧烤|甜点/,null,'food'],
-[/旅行|散步|骑车|自行车|公园|海边|爬山/,null,'trip'],
+[/旅行|旅游|散步|骑车|自行车|公园|海边|爬山|徒步|出游/,null,'trip'],
 [/生日/,['生日这一页，好好留给今天的你。','生日！蛋糕上的奶油有我的份吗？','这一年的生日，愿你过得安心。','生日这一页要收藏，下一年还能回来看看。','生日快乐……我悄悄送你一个小爪印。']],
-[/花束|鲜花|荷花|莲花|植物/,null,'flower']
+[/花束|鲜花|荷花|莲花|植物|玫瑰|郁金香/,null,'flower']
 ];
 function seedFriendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const text=journalText(context),event=events.find(([rule])=>rule.test(text));let line,topic;
 if(event){topic=event[2]||'event';const subject=text.match(event[0])[0];line=event[1]?.[cat];if(!line){const specific={food:[`${subject}这一口，值得慢慢享受。`,`${subject}都记进本子了，我的那一口呢？`,`${subject}的这一刻，慢慢留在这一页。`,`${subject}也能成为今天的小收藏！`,`${subject}……我可以凑近闻一下吗？`],trip:[`${subject}这段路，慢慢走也很好。`,`${subject}可以，回来记得给我带零食。`,`${subject}的这一刻，我想安静陪你看看。`,`${subject}又多了一页，下次想听你讲路上的发现。`,`${subject}……下次能不能带上我？`],flower:[`${subject}的温柔，收在这一页刚刚好。`,`${subject}很漂亮，旁边有我的零食吗？`,`${subject}这一页，我想安静多看一会儿。`,`${subject}值得收藏，想知道你为什么选中了它。`,`${subject}好漂亮……我轻轻盖个爪印。`]};line=specific[topic][cat]}}
@@ -50,7 +50,9 @@ if(!fragments.length)return photoReplies[cat];
 const pool=[first.text];
 // Include every written event, instead of responding to only the first matched theme.
 for(const [rule,,type] of events){const match=text.match(rule);if(match){const fact=match[0];pool.push(seedFriendResponse({note:fact},cat).text);const follow=type==='food'?[`这次的${fact}，最喜欢的是哪一口？`,`下次还想选${fact}吗？`,`给${fact}留了一页，它在今天排第几名？`]:type==='trip'?[`${fact}这一路，最想留下哪一段？`,`下次${fact}，还想走同样的路线吗？`,`除了${fact}，路上还有什么小发现？`]:type==='flower'?[`选中${fact}，是喜欢它的颜色还是别的细节？`,`这页的${fact}，想放在哪个位置收藏？`,`下次翻到${fact}，还会想起今天哪一刻？`]:/奖/.test(fact)?['知道拿奖的那一刻，第一反应是什么？','获奖这件事，最想先告诉谁？','这份奖的背后，哪一段努力最想记住？']:/作品集|网站|项目|作业|论文/.test(fact)?[`关于${fact}，这一页之后准备做哪一步？`,`${fact}里最花心思的地方，想单独记一页吗？`,`忙${fact}的时候，什么细节最想留下？`]:/加班|熬夜|疲惫|累了/.test(fact)?['这页写着辛苦，接下来想怎么歇一会儿？','忙到累的时候，有没有给自己留一点休息？','今天这些辛苦，想先把哪件事放下来？']:/难过|伤心|焦虑|失眠|委屈/.test(fact)?['这段心事，想有人听听，还是先安静待着？','这一页的不好受，不用急着变成开心。','说到这里，想先停一会儿也可以。']:['生日这一页，最想留下哪个瞬间？','今年生日，有什么想悄悄许下的愿望？','生日这天，哪件小事最想以后再读？'];const voices=['我陪你慢慢想。','猫猫竖起耳朵了。','不急着回答。','这个细节我想收藏。','我……有认真听。'];for(const sentence of follow)pool.push(sentence+voices[cat])}}
-for(let i=0;i<writtenReplies[cat].length;i++){const fragment=fragments[(i+1)%fragments.length],short=Array.from(fragment).slice(0,18).join('');pool.push('「'+short+'」。'+writtenReplies[cat][i])}
+const fact=text.match(events.find(([rule])=>rule.test(text))?.[0]||/$^/)?.[0];
+if(fact){for(const sentence of writtenReplies[cat])pool.push(fact+'这件事，'+sentence)}
+else{pool.length=0;pool.push(...writtenReplies[cat])}
 return [...new Set(pool)]}
 function friendResponse(context={},cat=window.RecordArt?.adopted().cat||0,variant=0){cat=Math.max(0,Math.min(4,Number(cat)||0));const replies=friendReplies(context,cat),index=Math.max(0,Math.floor(Number(variant)||0))%replies.length;return {topic:seedFriendResponse(context,cat).topic,text:replies[index],trait:traits[cat],count:replies.length}}
 window.CatVoice={response,friendResponse,friendReplies,journalText,traits};

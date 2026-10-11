@@ -1,8 +1,8 @@
 {
-  "version": "1.0.9",
-  "versionCode": 109,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.9.apk",
-  "sha256": "2ed4f9876b67abd51718d1da957c763c6077431e46c088b8eca27eb5136a6463",
-  "notes": "好友小猫改用 AI 自然回应，结合手账情绪与细节提问，移除括号引用与固定模板。",
-  "size": 3676861
+  "version": "1.0.10",
+  "versionCode": 110,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.10.apk",
+  "sha256": "c6c0749669be31aa875f5eb0cb243238e10a38d43c8d6064df59fd24c5ee3c52",
+  "notes": "小猫回复改回本机关键词与近义词触发，保留不同性格，多次点击切换相关回应。",
+  "size": 3676862
 }
