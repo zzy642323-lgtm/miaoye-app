@@ -1,4 +1,4 @@
-(()=>{window.MIAOYE_VERSION='1.0.11';window.MIAOYE_ANDROID=typeof window.MiaoyeCloud?.request==='function';if(!localStorage.getItem('miaoye-preview-onboarded'))localStorage.setItem('miaoye-preview-empty-start','1');if(!localStorage.getItem('miaoye-preview-cleared-v022')){const cleanup=indexedDB.deleteDatabase('miaoye-journal');cleanup.onsuccess=()=>{for(const key of Object.keys(localStorage))if(key.startsWith('miaoye-')&&!key.startsWith('miaoye-preview-'))localStorage.removeItem(key);localStorage.setItem('miaoye-preview-cleared-v022','1')}}const originalFetch=window.fetch.bind(window);let sequence=0;
+(()=>{window.MIAOYE_VERSION='1.0.12';window.MIAOYE_ANDROID=typeof window.MiaoyeCloud?.request==='function';if(!localStorage.getItem('miaoye-preview-onboarded'))localStorage.setItem('miaoye-preview-empty-start','1');if(!localStorage.getItem('miaoye-preview-cleared-v022')){const cleanup=indexedDB.deleteDatabase('miaoye-journal');cleanup.onsuccess=()=>{for(const key of Object.keys(localStorage))if(key.startsWith('miaoye-')&&!key.startsWith('miaoye-preview-'))localStorage.removeItem(key);localStorage.setItem('miaoye-preview-cleared-v022','1')}}const originalFetch=window.fetch.bind(window);let sequence=0;
 const pending=new Map();
 async function cloudFetch(url,options={}){
   const host=globalThis.window;
@@ -24,3 +24,4 @@ async function cloudFetch(url,options={}){
 }
 
 window.fetch=(url,options)=>window.MIAOYE_ANDROID&&String(url).startsWith('https://s7ianzbg94fw.meoo.run/cloud/')?cloudFetch(url,options):originalFetch(url,options);document.addEventListener('click',async e=>{const a=e.target.closest('a[download]');if(!window.MIAOYE_ANDROID||!a||!a.href.startsWith('blob:')&&!a.href.startsWith('data:image/png'))return;e.preventDefault();const blob=await(await originalFetch(a.href)).blob(),reader=new FileReader();reader.onload=()=>MiaoyeExport.savePng(reader.result);reader.readAsDataURL(blob)},true)})();
+
