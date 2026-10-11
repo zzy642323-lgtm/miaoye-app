@@ -1,0 +1,10 @@
+.git
+.env
+.meoo
+.sites-runtime
+node_modules
+android
+tests
+web/downloads
+web/legacy
+*.log

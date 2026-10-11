@@ -1,0 +1,6 @@
+.sites-runtime/
+.env
+.meoo/
+web/downloads/*.apk
+*.keystore
+*.idsig
