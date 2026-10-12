@@ -1,8 +1,8 @@
 {
-  "version": "1.0.15",
-  "versionCode": 115,
-  "url": "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-updates/miaoye-1.0.15.apk",
-  "sha256": "005354b77be267e7f6408d04148d55b93cf4925c5ca721a7da7fde4d76f3e3b0",
-  "notes": "好友卡片分别展示已使用照片与头像；长按图片保存到图库；升级后首次展示更新说明；完善 APP 内检查、下载、校验与安装更新。",
-  "size": 3689371
+  "version": "1.0.16",
+  "versionCode": 116,
+  "url": "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-updates/miaoye-1.0.16.apk",
+  "sha256": "8573622176f6ac0908fbdfc0039c86bdbfcb5bd4a4689dab9ed943f2f750cc06",
+  "notes": "查看指定好友时，大标题展示该好友的手账；返回全部后恢复好友手账。",
+  "size": 3697779
 }
