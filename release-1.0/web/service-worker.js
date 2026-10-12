@@ -1,4 +1,4 @@
-const CACHE='miaoye-web-1.0.15-apple1';
+const CACHE='miaoye-web-1.0.16-apple1';
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['./index.html?view=c','./notebook.html','./manifest.webmanifest','./assets/app-icon-192.png','./assets/app-icon-512.png']))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('miaoye-web-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

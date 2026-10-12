@@ -1,7 +1,7 @@
 (()=>{
 const version=window.MIAOYE_VERSION,KEY='miaoye-preview-update-seen';let layer=null,observer;
 if(!version||localStorage.getItem(KEY)===version)return;
-const changes=['好友卡片分别展示已贴上的照片，保留抠图白边；翻开后查看整页手账。','头像和昵称同步到云端，在好友列表和好友手账里展示。','长按手账图片，可选择保存到手机图库。','切换卡片自动换一句小猫回复，没有关键词也有十五句默认回应。','版本页可以检查更新、下载安装包，并查看下载失败原因。'];
+const changes=['查看某位好友时，顶部展示这位好友的手账标题；返回全部后恢复好友手账。','苹果主屏幕网页版已完成适配，两端共用账号、好友关系和公开手账。','保留好友卡片的贴纸预览、头像展示和长按照片保存。'];
 function attempt(){
  if(layer||document.querySelector('.onboarding,.account-start,.first-guide,.record-flow,dialog[open]')||!localStorage.getItem('miaoye-preview-onboarded'))return;
  layer=document.createElement('div');layer.className='update-notice';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','本次更新说明');
