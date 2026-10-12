@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "喵页 MIAOYE",
+  "short_name": "喵页",
+  "start_url": "./index.html?view=c",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f5ee",
+  "theme_color": "#f8f5ee",
+  "icons": [
+    {"src":"assets/app-icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"assets/app-icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

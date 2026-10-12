@@ -23,7 +23,19 @@ async function cloudFetch(url,options={}){
   });
 }
 
-window.fetch=(url,options)=>window.MIAOYE_ANDROID&&String(url).startsWith('https://s7ianzbg94fw.meoo.run/cloud/')?cloudFetch(url,options):originalFetch(url,options);document.addEventListener('click',async e=>{const a=e.target.closest('a[download]');if(!window.MIAOYE_ANDROID||!a||!a.href.startsWith('blob:')&&!a.href.startsWith('data:image/png'))return;e.preventDefault();const blob=await(await originalFetch(a.href)).blob(),reader=new FileReader();reader.onload=()=>MiaoyeExport.savePng(reader.result);reader.readAsDataURL(blob)},true)})();
+async function browserCloudFetch(url,options={}){
+ const config=window.MIAOYE_WEB_CLOUD;
+ if(!config)return originalFetch(url,options);
+ const target=new URL(url),path=target.pathname.slice(7);
+ if(target.origin!=='https://s7ianzbg94fw.meoo.run'||!target.pathname.startsWith('/cloud/')||target.username||target.password||target.hash)throw Error('不支持的云请求地址');
+ const allowed=/^(?:auth\/v1\/(?:token|signup|logout|user|verify|recover|resend|otp)|rest\/v1\/miaoye_backups|rest\/v1\/rpc\/miaoye_social_(?:me|profile|note|friends|request|friend_action|publish|publish_v2|feed|like|unshare)|storage\/v1\/object\/(?:authenticated\/)?miaoye-private\/[a-f0-9-]+\/[a-f0-9-]+\/[a-f0-9-]+\.json)$/;
+ if(!allowed.test(path))throw Error('不支持的云请求地址');
+ const headers=new Headers(options.headers);headers.set('apikey',config.anonKey);if(!headers.has('Authorization'))headers.set('Authorization','Bearer '+config.anonKey);headers.set('OneDay-App-Id',config.project);headers.set('X-Meoo-Source','local-dev');
+ let upstream=path,body=options.body;
+ if(options.method==='DELETE'&&path.startsWith('storage/v1/object/miaoye-private/')){upstream='storage/v1/object/miaoye-private';body=JSON.stringify({prefixes:[path.slice('storage/v1/object/miaoye-private/'.length)]});headers.set('Content-Type','application/json')}
+ return originalFetch(config.url+'/'+upstream+target.search,{...options,body,headers,redirect:'error'});
+}
+window.fetch=(url,options)=>window.MIAOYE_ANDROID&&String(url).startsWith('https://s7ianzbg94fw.meoo.run/cloud/')?cloudFetch(url,options):String(url).startsWith('https://s7ianzbg94fw.meoo.run/cloud/')?browserCloudFetch(url,options):originalFetch(url,options);document.addEventListener('click',async e=>{const a=e.target.closest('a[download]');if(!window.MIAOYE_ANDROID||!a||!a.href.startsWith('blob:')&&!a.href.startsWith('data:image/png'))return;e.preventDefault();const blob=await(await originalFetch(a.href)).blob(),reader=new FileReader();reader.onload=()=>MiaoyeExport.savePng(reader.result);reader.readAsDataURL(blob)},true)})();
 
 
 

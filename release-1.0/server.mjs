@@ -6,7 +6,7 @@ import {cloudProxy} from './cloud-proxy.mjs';
 try { process.loadEnvFile(); } catch (error) { if(error.code !== 'ENOENT') throw error; }
 
 const web = path.resolve(fileURLToPath(new URL('./web/', import.meta.url)));
-const types = {'.svg':'image/svg+xml','.json':'application/json; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.wasm':'application/wasm','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.apk':'application/vnd.android.package-archive'};
+const types = {'.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.json':'application/json; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.wasm':'application/wasm','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.apk':'application/vnd.android.package-archive'};
 export function createServer() {
   return http.createServer(async (req, res) => {
     const send = (status, type, body) => {

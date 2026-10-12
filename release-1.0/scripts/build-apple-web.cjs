@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+process.loadEnvFile(path.join(root,'.env'));
+const base=new URL(process.env.SUPABASE_PUBLIC_URL||process.env.SUPABASE_URL),key=process.env.SUPABASE_ANON_KEY;
+if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash||JSON.parse(Buffer.from(key.split('.')[1],'base64url')).role!=='anon')throw Error('Only HTTPS and the public anon key are allowed');
+const dist=path.join(root,'dist');fs.mkdirSync(dist,{recursive:true});
+fs.cpSync(path.join(root,'web'),dist,{recursive:true,filter:file=>!file.includes(path.sep+'downloads')&&!file.endsWith('AGENTS.md')});
+fs.writeFileSync(path.join(dist,'browser-cloud.js'),'window.MIAOYE_WEB_CLOUD='+JSON.stringify({url:base.href.replace(/\/$/,''),anonKey:key,project:'s7ianzbg94fw'})+';');
+fs.copyFileSync(path.join(root,'web','version.json'),path.join(dist,'web-version.json'));
+console.log('Apple web bundle prepared; only public anon credentials included.');

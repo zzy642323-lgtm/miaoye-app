@@ -20,6 +20,7 @@ document.addEventListener('click',async e=>{
   const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;canvas.getContext('2d').drawImage(img,0,0);
   const png=canvas.toDataURL('image/png');
   if(window.MiaoyeExport?.savePng){window.MiaoyeExport.savePng(png);panel.close()}
+  else if(window.MIAOYE_APPLE&&window.MiaoyeWebExport){window.MiaoyeWebExport.savePng(png)}
   else{const a=document.createElement('a');a.href=png;a.download='喵页照片-'+Date.now()+'.png';a.click();panel.close();toast('图片已下载')}
  }catch(error){toast(error.message||'图片保存失败，请重试')}finally{button.disabled=false}
 });
