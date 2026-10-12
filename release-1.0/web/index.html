@@ -50,7 +50,8 @@ document.addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='rema
 panel.addEventListener('click',e=>{if(e.target===panel){const r=panel.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)panel.close()}});
 const view=new URLSearchParams(location.search).get('view')||'c';if(designs.some(d=>d.id===view)){document.body.classList.add('single');document.querySelector('#proposal-'+view).classList.add('chosen');active=view;document.title='喵页 1.0 · '+designs.find(d=>d.id===view).name}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const routes={books:'books',friends:'friends',cats:'profile',profile:'profile'};if(routes[b.dataset.action]){e.stopImmediatePropagation();location.href='notebook.html?view='+routes[b.dataset.action]}},true);
-</script><script>document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&(b.dataset.action==='new'||b.dataset.route==='new'||b.classList.contains('cta'))){e.preventDefault();e.stopImmediatePropagation();location.href='notebook.html?view=books&record=1'}},true)</script><script src="home-records.js"></script><script src="account.js"></script><script src="onboarding.js"></script><script src="first-guide.js"></script></body></html>
+</script><script>document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&(b.dataset.action==='new'||b.dataset.route==='new'||b.classList.contains('cta'))){e.preventDefault();e.stopImmediatePropagation();location.href='notebook.html?view=books&record=1'}},true)</script><script src="home-records.js"></script><script src="account.js"></script><script src="onboarding.js"></script><script src="first-guide.js"></script><script src="update-notice.js"></script></body></html>
+
 
 
 

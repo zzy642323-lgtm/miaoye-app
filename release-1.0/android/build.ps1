@@ -5,7 +5,7 @@ $jdk=(Get-ChildItem (Join-Path $toolRoot 'jdk') -Directory | Select-Object -Firs
 $tools=Join-Path $toolRoot 'tools/android-15'
 $platform=Join-Path $toolRoot 'platform/android-35/android.jar'
 Set-Location -LiteralPath $project
-$build='.sites-runtime/android-build-v112'
+$build='.sites-runtime/android-build-v113'
 $env:JAVA_HOME=$jdk
 $env:PATH=(Join-Path $jdk 'bin')+';'+$env:PATH
 foreach($dir in @('assets/web','classes','dex')){New-Item -ItemType Directory -Force (Join-Path $build $dir) | Out-Null}
@@ -29,13 +29,16 @@ $key=Join-Path $toolRoot 'miaoye-test.keystore'
 if(-not(Test-Path -LiteralPath $key)){& (Join-Path $jdk 'bin/keytool.exe') -genkeypair -keystore $key -storepass android -keypass android -alias miaoye-test -dname 'CN=Miaoye Test, O=Miaoye, C=SG' -keyalg RSA -keysize 2048 -validity 10000;Check-Exit}
 $downloads='web/downloads'
 New-Item -ItemType Directory -Force $downloads | Out-Null
-$apk=Join-Path $downloads 'miaoye-1.0.12.apk'
+$apk=Join-Path $downloads 'miaoye-1.0.13.apk'
 & (Join-Path $tools 'apksigner.bat') sign --v4-signing-enabled false --ks $key --ks-pass pass:android --ks-key-alias miaoye-test --out $apk (Join-Path $build 'aligned.apk');Check-Exit
 & (Join-Path $tools 'apksigner.bat') verify --verbose $apk;Check-Exit
 New-Item -ItemType Directory -Force (Join-Path $build 'verification') | Out-Null
-& (Join-Path $jdk 'bin/javac.exe') -encoding UTF-8 -cp (Join-Path $build 'classes') -d (Join-Path $build 'verification') (Join-Path $PSScriptRoot 'tests/LocalPagesTest.java');Check-Exit
+& (Join-Path $jdk 'bin/javac.exe') -encoding UTF-8 -cp (Join-Path $build 'classes') -d (Join-Path $build 'verification') (Join-Path $PSScriptRoot 'tests/LocalPagesTest.java') (Join-Path $PSScriptRoot 'tests/UpdateUrlsTest.java');Check-Exit
 & (Join-Path $jdk 'bin/java.exe') -cp ((Join-Path $build 'classes')+';'+(Join-Path $build 'verification')) LocalPagesTest $apk;Check-Exit
+& (Join-Path $jdk 'bin/java.exe') -cp ((Join-Path $build 'classes')+';'+(Join-Path $build 'verification')) com.miaoye.journal.UpdateUrlsTest;Check-Exit
 & (Join-Path $tools 'aapt2.exe') dump badging $apk;Check-Exit
 Get-FileHash -LiteralPath $apk -Algorithm SHA256
+
+
 
 

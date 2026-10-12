@@ -1,8 +1,8 @@
 {
-  "version": "1.0.12",
-  "versionCode": 112,
-  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.12.apk",
-  "sha256": "5f98fae4993e7d85ece81ae88503542592f79e230a2f475a37aad41e558d7cfb",
-  "notes": "切换好友手账卡片自动轮换小猫回复，切回旧卡片也换句，普通重绘保留当前回复。",
-  "size": 3680957
+  "version": "1.0.13",
+  "versionCode": 113,
+  "url": "https://s7ianzbg94fw.meoo.run/downloads/miaoye-1.0.13.apk",
+  "sha256": "7b0896a3fc3adb6d56f0c038266f61e23880fcafeaee4c7dbcb710aa3dc9dfb3",
+  "notes": "好友卡片分别展示已使用照片与头像；长按图片保存到图库；升级后首次展示更新说明；完善 APP 内检查、下载、校验与安装更新。",
+  "size": 3689370
 }
