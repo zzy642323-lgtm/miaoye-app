@@ -1,8 +1,8 @@
 {
-  "version": "1.0.13",
-  "versionCode": 113,
-  "url": "https://github.com/zzy642323-lgtm/miaoye-app/releases/download/v1.0.13/miaoye-1.0.13.apk",
-  "sha256": "7b0896a3fc3adb6d56f0c038266f61e23880fcafeaee4c7dbcb710aa3dc9dfb3",
+  "version": "1.0.14",
+  "versionCode": 114,
+  "url": "https://github.com/zzy642323-lgtm/miaoye-app/releases/download/v1.0.14/miaoye-1.0.14.apk",
+  "sha256": "87d5848d0673ea56f473ab8e6a389f5d8443587ee3227ebabff42e847477db19",
   "notes": "好友卡片分别展示已使用照片与头像；长按图片保存到图库；升级后首次展示更新说明；完善 APP 内检查、下载、校验与安装更新。",
-  "size": 3689370
+  "size": 3689371
 }

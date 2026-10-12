@@ -13,10 +13,10 @@ test('long press offers a choice, calls native gallery only after confirmation; 
 });
 test('update notice waits for onboarding, acknowledges only on button click, and does not repeat',async()=>{
  const storage={},layers=[];let mutation,blocked=true;
- const ctx={window:{MIAOYE_VERSION:'1.0.13',addEventListener(){}},localStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v},document:{querySelector:()=>blocked?{}:null,head:{insertAdjacentHTML(){}},body:{append:layer=>layers.push(layer)},createElement:()=>({setAttribute(){},querySelector(){return this.button??={}},remove(){this.removed=true}})},MutationObserver:class{constructor(f){mutation=f}observe(){}disconnect(){}}};
+ const ctx={window:{MIAOYE_VERSION:'1.0.14',addEventListener(){}},localStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v},document:{querySelector:()=>blocked?{}:null,head:{insertAdjacentHTML(){}},body:{append:layer=>layers.push(layer)},createElement:()=>({setAttribute(){},querySelector(){return this.button??={}},remove(){this.removed=true}})},MutationObserver:class{constructor(f){mutation=f}observe(){}disconnect(){}}};
  const code=await load('update-notice.js');vm.runInNewContext(code,ctx);assert.equal(layers.length,0);
  storage['miaoye-preview-onboarded']='1';blocked=false;mutation();assert.equal(layers.length,1);assert.equal(storage['miaoye-preview-update-seen'],undefined);
- layers[0].button.onclick();assert.equal(storage['miaoye-preview-update-seen'],'1.0.13');vm.runInNewContext(code,ctx);assert.equal(layers.length,1);
+ layers[0].button.onclick();assert.equal(storage['miaoye-preview-update-seen'],'1.0.14');vm.runInNewContext(code,ctx);assert.equal(layers.length,1);
 });
 test('legacy local avatar and nickname are synced as profile metadata, then a new account pulls its own identity',async()=>{
  const storage={},events={},calls=[];let current={id:'a'};
@@ -26,3 +26,4 @@ test('legacy local avatar and nickname are synced as profile metadata, then a ne
  assert.ok(calls.some(c=>c.path.endsWith('social_profile')&&c.body.p_nickname==='我的昵称'&&c.body.p_avatar.includes('COMPRESSED')));
  current={id:'b'};events['miaoye-account-change']();await ctx.window.CloudProfile.sync();assert.equal(ctx.profileState.name,'新账号');assert.equal(ctx.profileState.avatar,undefined);assert.equal(storage['miaoye-preview-profile-owner'],'b');
 });
+

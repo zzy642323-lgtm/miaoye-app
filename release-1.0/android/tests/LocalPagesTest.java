@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.zip.*;
 public final class LocalPagesTest {
   public static void main(String[] args) throws Exception {
+    if(!LocalRequests.socialPath("/cloud/rest/v1/rpc/miaoye_social_publish_v2")||!LocalRequests.socialPath("/cloud/rest/v1/rpc/miaoye_social_profile")||LocalRequests.socialPath("/cloud/rest/v1/rpc/admin")||LocalRequests.socialPath("/cloud/rest/v1/rpc/miaoye_social_feed/other"))throw new AssertionError("Social routing whitelist incorrect");
     checkRoute(LocalRequests.HOME_URL, LocalRequests.Route.LOCAL);
     checkRoute("https://appassets.androidplatform.net/", LocalRequests.Route.LOCAL);
     checkRoute("https://appassets.androidplatform.net/app.js?v=14", LocalRequests.Route.LOCAL);

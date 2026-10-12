@@ -23,4 +23,7 @@ public final class LocalRequests {
   public static String pagePath(String path) {
     return path == null || path.isEmpty() || "/".equals(path) ? "/index.html" : path;
   }
+  public static boolean socialPath(String path) {
+    return path!=null&&path.matches("/cloud/rest/v1/rpc/miaoye_social_(me|profile|note|friends|request|friend_action|publish|publish_v2|feed|like|unshare)");
+  }
 }

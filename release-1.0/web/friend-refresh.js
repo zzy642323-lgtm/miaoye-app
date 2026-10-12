@@ -1,6 +1,6 @@
 (()=>{
 const liveFeed=visibleFeed,liveDraw=drawDeck;let cached=null,filter='',signature='',drag=null,refreshing=false;
-const stamp=list=>JSON.stringify(list.map(f=>[f.entry,f.time,f.title,f.note,f.photos]));
+const stamp=list=>JSON.stringify(list.map(f=>[f.entry,f.time,f.title,f.note,f.photos,f.avatar,f.name]));
 function allLive(){const selected=peerFilter;try{peerFilter='all';return liveFeed()}finally{peerFilter=selected}}
 function capture(){cached=allLive().map(f=>({...f,photos:[...f.photos]}));filter=peerFilter;signature=stamp(cached)}
 function hint(){if(refreshing)return;const deck=document.querySelector('#proposal-friends .friend-deck');if(!deck)return;let el=document.querySelector('.friend-refresh-hint');if(!el){el=document.createElement('p');el.className='friend-refresh-hint';el.setAttribute('role','status');deck.before(el)}const changed=cached&&stamp(allLive())!==signature;document.querySelector('#proposal-friends')?.classList.toggle('has-friend-update',!!changed);if(drag?.pulling)return;el.textContent='';el.hidden=true}
@@ -26,3 +26,4 @@ window.addEventListener('click',e=>{if(Date.now()<blockClickUntil&&e.target.clos
 window.addEventListener('storage',hint);window.addEventListener('miaoye-friends-update',hint);window.addEventListener('focus',hint);setInterval(()=>{if(!document.hidden)hint()},15000);
 document.head.insertAdjacentHTML('beforeend','<style>.friend-refresh-hint{text-align:center;color:#8a8474;font-size:11px;margin:0 0 14px;padding-top:var(--pull-space,0px);transition:padding-top .1s}.friend-refresh-hint[hidden]{display:none!important}#proposal-friends .screen{overscroll-behavior-y:contain}#proposal-friends.has-friend-update [data-friend-list]{position:relative}#proposal-friends.has-friend-update [data-friend-list]:after{content:"";position:absolute;right:2px;top:1px;width:7px;height:7px;border-radius:50%;background:#edcd56;box-shadow:0 0 0 2px #f8f5ee}</style>');drawDeck();
 })();
+

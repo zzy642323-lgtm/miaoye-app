@@ -1,5 +1,5 @@
 // Forward only the public Supabase API with the user's JWT. Never use the service role.
-const allowed = /^(?:functions\/v1\/cat-reply|auth\/v1\/(?:token|signup|logout|user|verify|recover|resend|otp)|rest\/v1\/miaoye_backups|rest\/v1\/rpc\/miaoye_social_(?:me|profile|note|friends|request|friend_action|publish|feed|like|unshare)|storage\/v1\/object\/(?:authenticated\/)?miaoye-private\/[a-f0-9-]+\/[a-f0-9-]+\/[a-f0-9-]+\.json)$/;
+const allowed = /^(?:functions\/v1\/cat-reply|auth\/v1\/(?:token|signup|logout|user|verify|recover|resend|otp)|rest\/v1\/miaoye_backups|rest\/v1\/rpc\/miaoye_social_(?:me|profile|note|friends|request|friend_action|publish|publish_v2|feed|like|unshare)|storage\/v1\/object\/(?:authenticated\/)?miaoye-private\/[a-f0-9-]+\/[a-f0-9-]+\/[a-f0-9-]+\.json)$/;
 export async function cloudProxy(req, res, url, env=process.env, fetcher=fetch) {
   if (!url.pathname.startsWith('/cloud/')) return false;
   const origin=req.headers.origin;
@@ -34,3 +34,4 @@ export async function cloudProxy(req, res, url, env=process.env, fetcher=fetch) 
   }catch{send(502,{error:'云端暂时连接不上，本机手账仍然保留。'});}
   return true;
 }
+
