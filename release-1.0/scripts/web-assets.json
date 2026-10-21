@@ -1,0 +1,634 @@
+[
+  {
+    "path": "web/assets/adventure-0-10-v9.webp",
+    "size": 169190,
+    "sha256": "9b30bd291943213c91528012d341db57d0933ba7346deffc6d869781e163875f",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-10-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-2-v9.webp",
+    "size": 254434,
+    "sha256": "f5e634ac288f45817f7939469daf4e936a0f9e7e0efdb1ad6d793cffbcc454b9",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-2-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-3-v9.webp",
+    "size": 188972,
+    "sha256": "ca37fc13e888aeab03e706b7192a8d005306ec88ca900f526d8138fd706a67b9",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-3-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-4-v9.webp",
+    "size": 210494,
+    "sha256": "95b860bf4ac5de11a4453fa519c0b810a19a2d5c28142c2d5a98229a650cb08d",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-4-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-5-v9.webp",
+    "size": 248620,
+    "sha256": "2cd99d80caa5e38aad60d1e79d354ddca4b774b74eb1c388d4ea1ef5c08f7942",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-5-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-6-v9.webp",
+    "size": 214394,
+    "sha256": "80287b2aa66446a57ebf158327d2ea5aaed332e0c8575c14ea884d776fbf9358",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-6-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-7-v9.webp",
+    "size": 244118,
+    "sha256": "5fe9c868b36f92d6fa5c14b10f95dd57431e90be634e2753f602368470bcea8e",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-7-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-8-v9.webp",
+    "size": 183164,
+    "sha256": "c05b78c71d18b1a6f5bd4d29119fa3b26c9f8ce845b8841100cfb124721b3806",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-8-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-9-v9.webp",
+    "size": 254402,
+    "sha256": "02f1637bef210d85721996c184ab5e8088afb851b53370560cfb05950973f9d6",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-9-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-0-v8.webp",
+    "size": 198936,
+    "sha256": "6aba6b05ab4420e331b764973d7116d8b27269b8c0c4318ab96a8c3b99bf7d38",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-0-v8.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-10-v9.webp",
+    "size": 212564,
+    "sha256": "26e12713a75e9118e6720de3404a790d26ac7952c711ca5fa005eb1a1e169bf5",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-10-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-2-v9.webp",
+    "size": 196490,
+    "sha256": "0967fdf7fa3ff930ad908bfb2709f20f73165ca55a624968dbd15aca5e4e1042",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-2-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-3-v9.webp",
+    "size": 225808,
+    "sha256": "bb4f2c51622e31b937be43ea798fe622657bd871545317d8d38fc8782fe26852",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-3-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-4-v9.webp",
+    "size": 189886,
+    "sha256": "227e5b3025f98350437fff11df75d0dc1eec4400d20a75d6281fe53657450220",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-4-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-5-v9.webp",
+    "size": 189932,
+    "sha256": "b7bca4ca187f1a9f6a4e007572ba33804758b27f3d13bf2ade74e4df25861776",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-5-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-6-v9.webp",
+    "size": 198846,
+    "sha256": "4ec38ad4e59a383db378a444e87cce32e0bdc2e15e72919a44b9fff37929aa3b",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-6-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-7-v9.webp",
+    "size": 188320,
+    "sha256": "2ba5c646f16fa0a4a26e1a55d9f6db01db692a5a794ff888e865538e1e4f1621",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-7-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-8-v9.webp",
+    "size": 241630,
+    "sha256": "7fdee04be743f21ce5c84edef01a9d8dcfea1e46cb8a11136fe7e95e5b2910e9",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-8-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-9-v9.webp",
+    "size": 185266,
+    "sha256": "d1369e8c36c2a3b093bd209c3fa513990c68d920db4b751a00a972ee6ed4330e",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-9-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-1-v8.webp",
+    "size": 170144,
+    "sha256": "354c73be2a69d77841f5a4483e519c791adfe97f1e35cd0df9f97cebea355bb6",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-1-v8.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-10-v9.webp",
+    "size": 243884,
+    "sha256": "080799358caaa0942c753be20af15f5a2b1b718232558eafb0d1896241acb359",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-10-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-2-v9.webp",
+    "size": 312160,
+    "sha256": "255d02b15c66d3d3f4911e13dfe4201815c238cc31d99e85c2fcd927e06498a8",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-2-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-3-v9.webp",
+    "size": 311608,
+    "sha256": "b744dac7f24ecf4d7413db416504373d09c8067268fd940f6bd261cc3e8c36c6",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-3-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-4-v9.webp",
+    "size": 300252,
+    "sha256": "b545c361a6f05d1da50cccc5ce39116dd6b8e3afcfca596b1374c1b44d220e06",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-4-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-5-v9.webp",
+    "size": 297466,
+    "sha256": "cfbc80f9ca508639cb58e512fc9d43a790cab95cd296d8f292682d3c8aaeb468",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-5-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-6-v9.webp",
+    "size": 236442,
+    "sha256": "cd2d6498503c4511a5e1735fe23671777cf267a0fd2f2c6043f13cb5ca95756a",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-6-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-7-v9.webp",
+    "size": 318686,
+    "sha256": "eb7a894352c40d5774b65e3f840e5cdfc2ba6310cf4ec389cd4318c304e1167f",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-7-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-8-v9.webp",
+    "size": 281922,
+    "sha256": "09f701d6664afa42ff52ffdf774e938460a018ac8ba2f704ea587619d94446a7",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-8-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-9-v9.webp",
+    "size": 319064,
+    "sha256": "7435fddc40a988c6a31e4ec2c69584031960b1621b344aca0579dcd970cd721b",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-9-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-2-v8.webp",
+    "size": 272216,
+    "sha256": "a0abcfa57338cd42126154bffdd4f143de77b8fbb67770360ea6c9b576fb2e65",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-2-v8.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-10-v9.webp",
+    "size": 236208,
+    "sha256": "11f20a154c8a1c18a193979f302c796ab37826e055f898f9052bdfa8263b61a8",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-10-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-2-v9.webp",
+    "size": 356538,
+    "sha256": "0f94e3a9d502f0fc1af4ee979c7d8bd3e9b369d88716030ef98cfa90ba4e330b",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-2-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-3-v9.webp",
+    "size": 315078,
+    "sha256": "7d0e409f37945c0955c23cdd3753f247c64502c7007af21a325388f0cc41bfe9",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-3-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-4-v9.webp",
+    "size": 256664,
+    "sha256": "990780762a0e06e06ce6e7caf7a8d4ff520a4a7e75093e347315f4479b61da41",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-4-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-5-v9.webp",
+    "size": 349758,
+    "sha256": "246dee21104041cd9c3e2b2b85e070b2633b6eb754324acac7d326cb6a241434",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-5-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-6-v9.webp",
+    "size": 349748,
+    "sha256": "497eeb7b79039485b0946e9a86788620fd2537aba9221bcd68726517b1043e2c",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-6-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-7-v9.webp",
+    "size": 339604,
+    "sha256": "f9de3eba646b919c3f1addaf2d8b23ce01d820c439fc045730c5a1c2ee39b1b5",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-7-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-8-v9.webp",
+    "size": 204354,
+    "sha256": "27f4be97004da801f50e6a8139456a56b8663f59533ba1a15e7fe98d3b89b7c7",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-8-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-9-v9.webp",
+    "size": 363588,
+    "sha256": "1c98e2425180889a3202c5dbd75e373f5bdf603f23baaf8337f8c42a11aa4579",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-9-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-3-v8.webp",
+    "size": 330240,
+    "sha256": "15aa0284a8b66c72a05e263dd30289ef0200c45cc09820ee23d9105ce6514f6f",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-3-v8.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-10-v9.webp",
+    "size": 141688,
+    "sha256": "5494df812ff48b2354b49cd5d1fae30ad8b8bfc214dad434b1ddf30a3e75a2e7",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-10-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-2-v9.webp",
+    "size": 194026,
+    "sha256": "043598ce0fd18f37d68232195b157822472b8c8eae219aa52597bc733ab68a29",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-2-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-3-v9.webp",
+    "size": 148014,
+    "sha256": "b8319b59570a911a90223c7f02cf31f8a93262335f37bf73cfdc550e5dc5bd6d",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-3-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-4-v9.webp",
+    "size": 238852,
+    "sha256": "4dbdb789119a17d05183ff18bfd4ba26c372613481f2465b4519ab977b995006",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-4-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-5-v9.webp",
+    "size": 236072,
+    "sha256": "24f66304f43571bc0178496eb6bec21bf630de327c4f335ec826128666f36365",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-5-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-6-v9.webp",
+    "size": 229466,
+    "sha256": "81849f37833c76db0838dd25dbdc5f28c1df82b7102f73baf898e6baa4b697eb",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-6-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-7-v9.webp",
+    "size": 204806,
+    "sha256": "d4b327b31a9cfff7d4252edec468b4d4b553fbda76bee7b9ad6c1ed7cedb6491",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-7-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-8-v9.webp",
+    "size": 225210,
+    "sha256": "2fef6f189dc6fa6917c5e862570bd3ea40ba7d970a3564231e3baed1ee269b34",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-8-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-9-v9.webp",
+    "size": 296588,
+    "sha256": "f97b552fa4f28cbe602b5bd5fee8d8d6c67dfafedde9d70902f21374d6abbada",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-9-v9.webp"
+    ]
+  },
+  {
+    "path": "web/assets/adventure-4-v8.webp",
+    "size": 214990,
+    "sha256": "5865f5a4acf874e282d577d300f9551da4733d8c349e9a5251b25987e2e9e77c",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/adventure-4-v8.webp"
+    ]
+  },
+  {
+    "path": "web/assets/cat-actions-v22.png",
+    "size": 1502710,
+    "sha256": "a71a573f0f2beca73503d7aaecaeea3be71d4af8d2259f14d85e662371953c46",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/cat-actions-v22.png"
+    ]
+  },
+  {
+    "path": "web/assets/cats.png",
+    "size": 1502710,
+    "sha256": "a71a573f0f2beca73503d7aaecaeea3be71d4af8d2259f14d85e662371953c46",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/cat-actions-v22.png"
+    ]
+  },
+  {
+    "path": "web/assets/coffee.webp",
+    "size": 284350,
+    "sha256": "b95ee1ea467b307eb97fa2380863cce10ab55012021e6bd5149e80b2bf248f55",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/coffee.webp"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-bike.png",
+    "size": 1736774,
+    "sha256": "ce8464d851a33d1658d601792a9e670c6b2d2a9c9af69796a9f0065e27b5eb58",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/ce8464d851a33d1658d601792a9e670c6b2d2a9c9af69796a9f0065e27b5eb58.png"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-cans.png",
+    "size": 2126039,
+    "sha256": "d187b2e5e27b313ea3f44d124826a51cacfa46dc8dbdbac165c92172c729ed68",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/d187b2e5e27b313ea3f44d124826a51cacfa46dc8dbdbac165c92172c729ed68.png"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-cupcake.png",
+    "size": 1763973,
+    "sha256": "99f70b54ff9317fe6c253202bf63a9485212f518894be24be1d04aa710fc4261",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/99f70b54ff9317fe6c253202bf63a9485212f518894be24be1d04aa710fc4261.png"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-cups.png",
+    "size": 1325218,
+    "sha256": "3ef84770658269241f642cbed0598bc0e95f3ddda74a1ce7c6e428fdd1bf5cca",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/3ef84770658269241f642cbed0598bc0e95f3ddda74a1ce7c6e428fdd1bf5cca.png"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-lotus.png",
+    "size": 1598846,
+    "sha256": "3cca4ddcded5381ba09b9915dfcbb8899e8fbcba80f377ffccb416da6b509857",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/3cca4ddcded5381ba09b9915dfcbb8899e8fbcba80f377ffccb416da6b509857.png"
+    ]
+  },
+  {
+    "path": "web/assets/cutout-pink-cups.png",
+    "size": 1384646,
+    "sha256": "40eb2af2219f233db14cc73054e99eb2e0ce21fd1d6e58a75f30bf3334192b0a",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/40eb2af2219f233db14cc73054e99eb2e0ce21fd1d6e58a75f30bf3334192b0a.png"
+    ]
+  },
+  {
+    "path": "web/assets/handwriting.ttf",
+    "size": 1514968,
+    "sha256": "812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d.ttf"
+    ]
+  },
+  {
+    "path": "web/assets/life-1.jpg",
+    "size": 167711,
+    "sha256": "c6924106b6afe69bad68590f11668c9ec472f7d32ef2a5a423b33efdf66e7999",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/c6924106b6afe69bad68590f11668c9ec472f7d32ef2a5a423b33efdf66e7999.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-10.jpg",
+    "size": 234684,
+    "sha256": "47070c4b41a464a511123fd5b29453ddab13abd205b87fac2dcf7aad468b7f0c",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/47070c4b41a464a511123fd5b29453ddab13abd205b87fac2dcf7aad468b7f0c.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-11.jpg",
+    "size": 151419,
+    "sha256": "a522b9e2da4f8112c2499bc25f288c39f1c276e182a748d6f7c388a0a4138920",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/a522b9e2da4f8112c2499bc25f288c39f1c276e182a748d6f7c388a0a4138920.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-12.jpg",
+    "size": 133871,
+    "sha256": "1032c1c5789d162e7c422015b0e1be48fde9d06f3d9841ea256806c8826c2267",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/1032c1c5789d162e7c422015b0e1be48fde9d06f3d9841ea256806c8826c2267.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-13.jpg",
+    "size": 589514,
+    "sha256": "6fe02a986129ac82cd8ca007e39878cb9e0b53bf4ce2aa81c827a8bffc9d5ece",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/6fe02a986129ac82cd8ca007e39878cb9e0b53bf4ce2aa81c827a8bffc9d5ece.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-14.jpg",
+    "size": 134545,
+    "sha256": "13bda2c5c9612a3cfe0080796398eb85798d8d7458f5bcb964b05e9c84c79d2d",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/13bda2c5c9612a3cfe0080796398eb85798d8d7458f5bcb964b05e9c84c79d2d.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-15.jpg",
+    "size": 977233,
+    "sha256": "4d978aab8c8bebeee717e5bca759ecd0ce27002f74149421a53e29e7035528ca",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/4d978aab8c8bebeee717e5bca759ecd0ce27002f74149421a53e29e7035528ca.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-2.jpg",
+    "size": 420492,
+    "sha256": "ca7efe67542588f483674c6a856febf23e083b33df06dee3c351fdf8274302c7",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/ca7efe67542588f483674c6a856febf23e083b33df06dee3c351fdf8274302c7.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-3.jpg",
+    "size": 1055682,
+    "sha256": "cecdb516673e568784078800327211abcd7a533b81d23bb599e0b0420706e6ef",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/cecdb516673e568784078800327211abcd7a533b81d23bb599e0b0420706e6ef.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-4.jpg",
+    "size": 861079,
+    "sha256": "476cf2899a914ffcb4f8bf832b3c58d3cac2d0f6df6e333466028beaa3aede82",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/476cf2899a914ffcb4f8bf832b3c58d3cac2d0f6df6e333466028beaa3aede82.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-5.jpg",
+    "size": 195574,
+    "sha256": "b872e6d60d861d2faa910c141fcdd6fa55d8cfd2774a796ad84d44143fdb363f",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/b872e6d60d861d2faa910c141fcdd6fa55d8cfd2774a796ad84d44143fdb363f.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-6.jpg",
+    "size": 291146,
+    "sha256": "2921642311dae7c47b0664277ec5998767c80c99deb7ac61d0f595219b6abef5",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/2921642311dae7c47b0664277ec5998767c80c99deb7ac61d0f595219b6abef5.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-7.jpg",
+    "size": 746433,
+    "sha256": "3559064088c248dc1e9430c559bb9caa0a321268ad6b40af4f8081e97cebc387",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/3559064088c248dc1e9430c559bb9caa0a321268ad6b40af4f8081e97cebc387.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-8.jpg",
+    "size": 158791,
+    "sha256": "3549019391e1e92d44aac80047b694393d227273d1e80e66e0b4eab9efc229e5",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/3549019391e1e92d44aac80047b694393d227273d1e80e66e0b4eab9efc229e5.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-9.jpg",
+    "size": 162580,
+    "sha256": "f0445ed3886fc1410d6537cec589fefde8c0cd918ca0c0825dd860130ca7fa02",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/f0445ed3886fc1410d6537cec589fefde8c0cd918ca0c0825dd860130ca7fa02.jpg"
+    ]
+  },
+  {
+    "path": "web/assets/life-cutouts.png",
+    "size": 2604549,
+    "sha256": "2e033695054bdbc3ddb23262a646ee3bc33a3ca5ba3afeaff6d4f5260edb571c",
+    "sources": [
+      "https://dnu0oysda99yukul.database.meoo.xyz/storage/v1/object/public/miaoye-web-assets/2e033695054bdbc3ddb23262a646ee3bc33a3ca5ba3afeaff6d4f5260edb571c.png"
+    ]
+  },
+  {
+    "path": "web/assets/stickers-v14.webp",
+    "size": 214992,
+    "sha256": "1e32b65c3ecbbc1f7dd708ae5d6feeed54be7195f3cce2541eea827f26bf5b8c",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/assets/stickers-v14.webp"
+    ]
+  },
+  {
+    "path": "web/engine/models/u2netp.onnx",
+    "size": 4574861,
+    "sha256": "309c8469258dda742793dce0ebea8e6dd393174f89934733ecc8b14c76f4ddd8",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/models/u2netp.onnx"
+    ]
+  },
+  {
+    "path": "web/engine/vendor/ort-wasm-simd-threaded.wasm",
+    "size": 11246032,
+    "sha256": "207d02be4591c156b0a98f024f3d58005b5b04c92274d759fb390338c63559ea",
+    "sources": [
+      "https://s7ianzbg94fw.meoo.run/vendor/ort-wasm-simd-threaded.wasm"
+    ]
+  }
+]

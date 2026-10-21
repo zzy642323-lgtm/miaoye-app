@@ -21,6 +21,7 @@ export function createServer() {
       if (name.startsWith('/api/')) return send(401, 'application/json; charset=utf-8', '{"error":"此版本使用设备上的手账，暂未开放云同步。"}');
       if (!['GET','HEAD'].includes(req.method)) return send(405, 'text/plain', 'Method not allowed');
       let relative = name === '/' ? 'index.html' : name.slice(1);
+      if(relative==='web-version.json')relative='version.json';
       if(relative.startsWith('models/')||relative.startsWith('vendor/'))relative='engine/'+relative;
       if (relative.split(/[\\/]/).some(part => part === '..' || part.startsWith('.')) || relative.includes('\0')) return send(403, 'text/plain', 'Forbidden');
       const file = path.resolve(web, relative);

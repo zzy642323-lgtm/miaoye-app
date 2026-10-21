@@ -2,6 +2,7 @@
 .env
 .meoo
 .sites-runtime
+dist
 node_modules
 android
 tests
